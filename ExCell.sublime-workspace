@@ -1,0 +1,681 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"gpx",
+				"gpxContent"
+			],
+			[
+				"route",
+				"routePoints"
+			],
+			[
+				"sea",
+				"searchResults"
+			],
+			[
+				"set",
+				"setCenter"
+			],
+			[
+				"dra",
+				"drawRoute"
+			],
+			[
+				"elev",
+				"elevationRoute"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.php",
+			"settings":
+			{
+				"buffer_size": 1174,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "classes/exCell.php",
+			"settings":
+			{
+				"buffer_size": 12104,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "str",
+		"selected_items":
+		[
+			[
+				"str",
+				"StringEncode: URL Decode"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"git quic",
+				"Git: Quick Commit"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"git sta",
+				"Git: Stash Apply"
+			],
+			[
+				"git add .",
+				"Git: Add..."
+			],
+			[
+				"git add ",
+				"Git: Add..."
+			],
+			[
+				"git s",
+				"Git: Status"
+			],
+			[
+				"git",
+				"Git: Commit"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 416.0
+	},
+	"console":
+	{
+		"height": 174.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/E/xampp/htdocs/exCell",
+		"/E/xampp/htdocs/exCell/classes",
+		"/E/xampp/htdocs/exCell/vendor",
+		"/E/xampp/htdocs/exCell/vendor/phpoffice",
+		"/E/xampp/htdocs/exCell/vendor/phpoffice/phpexcel",
+		"/E/xampp/htdocs/exCell/vendor/phpoffice/phpexcel/Classes",
+		"/E/xampp/htdocs/exCell/vendor/phpoffice/phpexcel/Classes/PHPExcel"
+	],
+	"file_history":
+	[
+		"/E/xampp/htdocs/exCell/vendor/phpoffice/phpexcel/Classes/PHPExcel/Worksheet.php",
+		"/E/xampp/htdocs/exCell/vendor/phpoffice/phpexcel/Classes/PHPExcel/NamedRange.php",
+		"/E/xampp/htdocs/exCell/vendor/phpoffice/phpexcel/Classes/PHPExcel/Cell.php",
+		"/I/Software/web/UltraVolta425_Teleport_Pro_v_1_59/UltraVolta425_Teleport_Pro_v_1_59/KeyGen/f4cg.nfo",
+		"/E/xampp/htdocs/exCell/vendor/phpoffice/phpexcel/Classes/PHPExcel.php",
+		"/E/xampp/htdocs/exCell/.gitignore",
+		"/E/Data/Mark/Projects/Material Maps/src/js/files.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/templates/bottomSheet.html",
+		"/E/Data/Mark/Projects/Material Maps/src/js/templates/infopanel.html",
+		"/E/Data/Mark/Projects/Material Maps/src/styles/layout.scss",
+		"/C/Users/Mark/Downloads/Route.gpx",
+		"/E/Data/Mark/Projects/Material Maps/src/js/controllers/bottomSheetController.js",
+		"/E/Data/Mark/Dropbox/OLM/Products/MyLife/Customers/Birmingham/Adoption Site/Copy/LIVE/Home content/home-intro.htm",
+		"/E/Data/Mark/Dropbox/OLM/Products/MyLife/Customers/Birmingham/Adoption Site/Copy/LIVE/Home content/home-contact-us.htm",
+		"/E/Data/Mark/Projects/Material Maps/todo.txt",
+		"/C/Users/Mark/Downloads/route.json",
+		"/E/Data/Mark/Projects/Material Maps/dist/assets/templates/bottomSheet.html",
+		"/E/Data/Mark/Projects/Material Maps/src/js/gpx.js",
+		"/C/Users/Mark/Downloads/Start of Frocester Hill Route.gpx",
+		"/E/Data/Mark/Projects/Material Maps/route-format.gpx",
+		"/E/Data/Mark/Projects/Material Maps/src/js/app.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/templates/header.html",
+		"/E/Data/Mark/Dropbox/formbuilder/examples/BCC/LIVE/BCC-AF-Enquiry-PROD.htm",
+		"/E/Data/Mark/Projects/Material Maps/index.php",
+		"/E/Data/Mark/Projects/Material Maps/src/js/index.js",
+		"/E/Data/Mark/Projects/Material Maps/gulpfile.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/controllers/mapController.js",
+		"/E/Data/Mark/Projects/Material Maps/src/styles/colour.scss",
+		"/E/Data/Mark/Projects/Material Maps/package.json",
+		"/E/Data/Mark/Projects/ExcelToJS/index.html",
+		"/E/Data/Mark/Projects/ExcelToJS/package.json",
+		"/E/Data/Mark/Projects/ExcelToJS/formula-packages.bat",
+		"/E/Data/Mark/Projects/Material Maps/src/styles/chart.scss",
+		"/E/Data/Mark/Projects/Material Maps/src/js/directives/chartistTooltip.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/directives/index.js",
+		"/C/Users/Mark/Desktop/careController.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/app-vue.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/controllers/chartController.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/controllers/index.js",
+		"/E/Data/Mark/Projects/Material Maps/node_modules/angular-chartjs/demo/app.js",
+		"/C/Users/Mark/Desktop/index.htm",
+		"/I/Software/Office - Productivity/CheckPointVPN-WIN7-X64/site.txt",
+		"/E/Data/Mark/Projects/Material Maps/src/js/templates/searchResultsDialog.html",
+		"/E/Data/Mark/Projects/Material Maps/src/js/directives/infopanel.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/controllers/toolbarController.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/templates/elevationChartBottomSheet.html",
+		"/E/Data/Mark/Projects/Material Maps/src/js/controllers/searchController.js",
+		"/C/Users/Mark/Desktop/contact-layout.html",
+		"/C/Users/Mark/Desktop/contactsControllers.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/templates/search-results.html",
+		"/E/Data/Mark/Projects/Material Maps/src/js/directives/searchResults.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/services/searchDialog.js",
+		"/E/Data/Mark/Projects/Material Maps/dist/assets/js/app.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/services/index.js",
+		"/E/Data/Mark/Projects/osmaps/src/js/app.js",
+		"/E/Data/Mark/Projects/osmaps/src/js/components/header-component.js",
+		"/E/Data/Mark/Projects/Material Maps/src/styles/main.scss",
+		"/C/Users/Mark/Desktop/angular-care-cap/angular-care-cap/js/controllers/careController.js",
+		"/C/Users/Mark/Desktop/angular-care-cap/angular-care-cap/js/app.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/components/infopanel-component.js",
+		"/E/Data/Mark/Projects/Material Maps/src/js/directives/header.js",
+		"/C/Users/Mark/Desktop/angular-care-cap/angular-care-cap/index.htm",
+		"/C/Users/Mark/Desktop/header.html",
+		"/C/Users/Mark/Desktop/header.js",
+		"/C/Users/Mark/Desktop/app.js",
+		"/E/Data/Mark/Projects/osmaps/gulpfile.js",
+		"/E/Data/Mark/Projects/Material Maps/.gitignore",
+		"/E/Data/Mark/Dropbox/formbuilder/js/Shelter.Feedback.js",
+		"/E/Data/Mark/Dropbox/formbuilder/js/runtime.tablegroup.js",
+		"/E/Data/Mark/Dropbox/formbuilder/js/runtime.js",
+		"/E/Data/Mark/Dropbox/formbuilder/js/modes/affordability.js",
+		"/E/Data/Mark/Dropbox/formbuilder/js/views.templates.js",
+		"/E/Data/Mark/Dropbox/formbuilder/js/Shelter.Templates.js",
+		"/E/Data/Mark/Dropbox/formbuilder/css/style.css",
+		"/E/Data/Mark/Dropbox/formbuilder/js/init.js",
+		"/E/Data/Mark/Dropbox/formbuilder/js/utils.js",
+		"/E/Data/Mark/Dropbox/formbuilder/dist/data/la.js",
+		"/E/Data/Mark/Dropbox/formbuilder/gruntfile.js",
+		"/E/Data/Mark/Dropbox/formbuilder/examples/BCC/INT/BCC-A+F-Enquiry.htm",
+		"/E/Data/Mark/Dropbox/formbuilder/js/runtime.init.js",
+		"/E/Data/Mark/Dropbox/formbuilder/dist/Affordability.htm",
+		"/E/Data/Mark/Dropbox/formbuilder/js/libs/parsley200.js",
+		"/C/Users/Mark/Desktop/docs/gulpfile.js",
+		"/E/Data/Mark/Dropbox/payload.txt",
+		"/C/Users/Mark/Desktop/New Text Document.txt",
+		"/E/Data/Mark/Projects/osmaps/todo.txt",
+		"/E/Data/Mark/Projects/osmaps/src/js/files.js",
+		"/E/Data/Mark/Projects/osmaps/src/styles/layout.scss",
+		"/E/xampp/htdocs/osmaps/gulpfile.js",
+		"/E/Data/Mark/Projects/osmaps/package.json",
+		"/E/xampp/htdocs/osmaps/package.json",
+		"/E/xampp/htdocs/osmaps/src/styles/layout.scss",
+		"/C/Users/Mark/Desktop/angularMaterial/src/app.js",
+		"/E/xampp/laravel/postcodes/gulpfile.js",
+		"/E/Data/Mark/Projects/angularMaps/package.json",
+		"/E/Data/Mark/Projects/angularMaps/gulpfile.js",
+		"/E/Data/Mark/Projects/osmaps/src/js/test.ts",
+		"/E/Data/Mark/Projects/osmaps/src/js/components/infopanel-component.js",
+		"/C/Users/Mark/AppData/Roaming/Adobe/Lightroom/Preferences/Lightroom 6 Preferences.agprefs",
+		"/E/Data/Mark/Projects/osmaps/route-format.gpx",
+		"/C/Users/Mark/Desktop/testApp/app/Http/Controllers/ContactsController.php",
+		"/C/Users/Mark/Desktop/testApp/app/Http/routes.php",
+		"/E/Data/Mark/Projects/osmaps/index.html",
+		"/C/Users/Mark/Desktop/index.php",
+		"/E/Data/Mark/Projects/osmaps/src/js/openspace-snippets.js",
+		"/E/Data/Mark/Projects/osmaps/src/js/components/open-file-component.js",
+		"/E/Data/Mark/Dropbox/Code/PHP/os/route.php",
+		"/C/Users/Mark/Downloads/bad.gpx",
+		"/E/Data/Mark/Projects/osmaps/src/js/map-functions-original.js",
+		"/C/Users/Mark/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Mark/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/Mark/AppData/Roaming/Sublime Text 3/Packages/DocBlockr/Base File.sublime-settings",
+		"/C/Users/Mark/Downloads/route (1).gpx",
+		"/C/Users/Mark/Downloads/route.gpx",
+		"/C/Users/Mark/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Mark/AppData/Roaming/Sublime Text 3/Installed Packages/Theme - Soda SolarizedDark.sublime-package",
+		"/E/Data/Mark/Projects/osmaps/dist/assets/css/main.min.css",
+		"/C/Users/Mark/AppData/Roaming/Sublime Text 3/Packages/User/Distraction Free.sublime-settings",
+		"/E/Data/Mark/Projects/osmaps/src/styles/shame.scss",
+		"/E/Data/Mark/Projects/osmaps/src/styles/main.scss",
+		"/E/Data/Mark/Dropbox/formbuilder/examples/BCC/General-Enquiry-TEST.htm",
+		"/E/Data/Mark/Dropbox/formbuilder/examples/BCC/BCC-AF-Enquiry-TEST.htm",
+		"/I/Software/ISO/Office/Office 2013/[www.Cpasbien.pe] Microsoft.Visio.Professional.2013.x64-iNDiSO/indiso.nfo",
+		"/E/Data/Mark/Projects/osmaps/.jscsrc",
+		"/E/Data/Mark/Projects/osmaps/src/js/snapToRoads.js",
+		"/E/Data/Mark/Dropbox/formbuilder/examples/BCC/Eligibility.htm",
+		"/C/Users/Mark/Desktop/app.blade.php",
+		"/C/Users/Mark/Desktop/index.blade.php"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 102.0,
+		"where_history":
+		[
+			"E:\\Data\\Mark\\Projects\\Material Maps\\src\\js",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"namedRanges",
+			"$this->phpExcel",
+			"dependencies",
+			"calculateDepths",
+			"row",
+			"results",
+			"Index",
+			"index",
+			"extractAllCellReferencesInRange",
+			"setDepth",
+			"filterArray",
+			"Array",
+			"$ref",
+			"cellref",
+			"$cell",
+			"$objPHPExcel",
+			"workSheet",
+			"n",
+			"sheetData",
+			"dependencies",
+			"$phpExcel",
+			"$depth",
+			"depth",
+			"calculateDepths",
+			"$this->data[$i]",
+			"m",
+			"&nbsp;&nbsp;&nbsp;&nbsp;",
+			"pointToGoogle",
+			"console",
+			"snapToRoad",
+			"route",
+			"data.route",
+			"data.waypoints",
+			".G",
+			"route",
+			"waypoints",
+			"saveRoute",
+			"gpxRoute",
+			"</span>",
+			"<span flex>",
+			" hide-sm",
+			"addClickHandler",
+			" - ",
+			"formula-",
+			"Events",
+			"events",
+			"profile",
+			"profileOptions",
+			"profileData",
+			"profileOptions",
+			"    $scope.profileOptions = {\n",
+			"profileOptions",
+			"false",
+			"visualization",
+			"\"",
+			"snapToRoad",
+			"drawProfile",
+			"updateDistance",
+			"drawProfile",
+			"modal-scroll-height",
+			"updateDistance",
+			"drawRoute",
+			"drawProfile",
+			"updateDistance",
+			"Distance",
+			"$parent",
+			"addMarker",
+			"$scope.distance",
+			"self",
+			"This",
+			"plotElevation",
+			"this",
+			"Ascent",
+			"ascent",
+			"Ascent",
+			"ascent",
+			"followRoads",
+			"showToast",
+			"$scope.showToast",
+			"toastr",
+			"toast",
+			"toastr",
+			"self",
+			"this",
+			"self",
+			"$scope.drawProfile",
+			"this",
+			"showMarker",
+			"addMarker",
+			"span",
+			"div",
+			"mdBottomSheet",
+			"list",
+			"ctrl.",
+			"this",
+			" +",
+			"'",
+			"items",
+			"showCustomGreeting",
+			"showSearchResults",
+			"Delete User",
+			"$mdDialog",
+			"showSearchResults",
+			"User",
+			"user",
+			"resultsDialog",
+			"drawProfile",
+			"$scope.drawProfile();",
+			"self",
+			"this",
+			"setRoute",
+			"this",
+			"self",
+			"minX",
+			"self",
+			"this",
+			"AppCtrl",
+			"this",
+			": ",
+			",",
+			"v-",
+			"'",
+			"' +",
+			"section",
+			"toastr",
+			"$scope",
+			"toastr.error",
+			"_black"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"MapCtrl"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1174,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								657,
+								657
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "classes/exCell.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12104,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7066,
+								7066
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4518.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 142.0
+	},
+	"pinned_build_system": "",
+	"project": "ExCell.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"fil",
+				"src\\js\\files.js"
+			],
+			[
+				"bott",
+				"dist\\assets\\templates\\bottomSheet.html"
+			],
+			[
+				"gpx",
+				"src\\js\\gpx.js"
+			],
+			[
+				"bottom",
+				"src\\js\\controllers\\bottomSheetController.js"
+			],
+			[
+				"file",
+				"src\\js\\files.js"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"gulp",
+				"gulpfile.js"
+			],
+			[
+				"app.j",
+				"src\\js\\app.js"
+			],
+			[
+				"header",
+				"src\\js\\templates\\header.html"
+			],
+			[
+				"app",
+				"src\\js\\app.js"
+			],
+			[
+				"app.js",
+				"src\\js\\app.js"
+			],
+			[
+				"header.ht",
+				"src\\js\\templates\\header.html"
+			],
+			[
+				"app-v",
+				"src\\js\\app-vue.js"
+			],
+			[
+				"layout",
+				"src\\styles\\layout.scss"
+			],
+			[
+				"search",
+				"src\\js\\templates\\searchResultsDialog.html"
+			],
+			[
+				"infopan",
+				"src\\js\\templates\\infopanel.html"
+			],
+			[
+				"infop",
+				"src\\js\\directives\\infopanel.js"
+			],
+			[
+				"info",
+				"src\\js\\templates\\infopanel.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"E:\\Data\\Mark\\Projects\\Material Maps\\Material Maps.sublime-project"
+			],
+			[
+				"ex",
+				"E:\\Data\\Mark\\Projects\\ExcelToJS\\Excel to JS.sublime-project"
+			],
+			[
+				"f",
+				"E:\\Data\\Mark\\Dropbox\\formbuilder\\js\\formbuilder.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 329.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

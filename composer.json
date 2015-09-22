@@ -1,0 +1,10 @@
+{
+	"name": "calculon/calculon",
+	"description": "The next calc engine",
+	"keywords": ["Calculation Engine", "Excel"],
+	"license": "MIT",
+	"type": "project",
+	"require": {
+		"phpoffice/phpexcel": "dev-master"
+	}
+}
