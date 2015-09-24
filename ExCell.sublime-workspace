@@ -147,6 +147,8 @@
 	],
 	"file_history":
 	[
+		"/E/xampp/htdocs/ExCell/.gitignore",
+		"/E/My Web Sites/index.html",
 		"/E/xampp/htdocs/exCell/vendor/phpoffice/phpexcel/Classes/PHPExcel/Worksheet.php",
 		"/E/xampp/htdocs/exCell/vendor/phpoffice/phpexcel/Classes/PHPExcel/NamedRange.php",
 		"/E/xampp/htdocs/exCell/vendor/phpoffice/phpexcel/Classes/PHPExcel/Cell.php",
@@ -272,9 +274,7 @@
 		"/I/Software/ISO/Office/Office 2013/[www.Cpasbien.pe] Microsoft.Visio.Professional.2013.x64-iNDiSO/indiso.nfo",
 		"/E/Data/Mark/Projects/osmaps/.jscsrc",
 		"/E/Data/Mark/Projects/osmaps/src/js/snapToRoads.js",
-		"/E/Data/Mark/Dropbox/formbuilder/examples/BCC/Eligibility.htm",
-		"/C/Users/Mark/Desktop/app.blade.php",
-		"/C/Users/Mark/Desktop/index.blade.php"
+		"/E/Data/Mark/Dropbox/formbuilder/examples/BCC/Eligibility.htm"
 	],
 	"find":
 	{
