@@ -1,5 +1,1 @@
-/vendor
-/node_modules
-.env
-*.sublime-project
-*.sublime-workspace
+node_modules

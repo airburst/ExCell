@@ -1,0 +1,21 @@
+{
+  "name": "ex-cell",
+  "version": "1.0.0",
+  "description": "An Electron application to read and process the formulae in Excel spreadsheets.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "keywords": [
+    "Electron"
+  ],
+  "author": "Mark Fairhurst",
+  "license": "ISM",
+  "devDependencies": {
+    "electron-prebuilt": "^1.2.2"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "xlsx": "^0.8.0"
+  }
+}
