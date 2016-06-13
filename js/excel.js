@@ -14,7 +14,6 @@ const XLSX = require('xlsx');
 // s	the style/theme of the cell (if applicable)
 
 // Data Types
-
 // The raw value is stored in the v field, interpreted based on the t field.
 // Type b is the Boolean type. v is interpreted according to JS truth tables
 // Type e is the Error type. v holds the number and w holds the common name:
@@ -29,19 +28,33 @@ const XLSX = require('xlsx');
 // 0x2A	#N/A
 // 0x2B	#GETTING_DATA
 
-let workbook = XLSX.readFile('checker.xlsx');
-let sheetNames = workbook.SheetNames,
-    output = '';
+class Excell {
 
-for (let name of sheetNames) {
-    let worksheet = workbook.Sheets[name];
-    for (sheet in worksheet) {
-        /* all keys that do not begin with "!" correspond to cell addresses */
-        if (sheet[0] === '!') continue;
-        output += (name + '!' + sheet + '=' + JSON.stringify(worksheet[sheet])) + '\n';
+    constructor() {
+        this.data = [];
     }
-    document.getElementById('excel-file').innerText = output;
-};
+
+    processFile(fileName) {
+        let workbook = XLSX.readFile(fileName); // TODO: Error check
+        let sheetNames = workbook.SheetNames,
+            output = '';
+
+        for (let name of sheetNames) {
+            let worksheet = workbook.Sheets[name];
+            for (let sheet in worksheet) {
+                /* all keys that do not begin with "!" correspond to cell addresses */
+                if (sheet[0] === '!') continue;
+                output += (name + '!' + sheet + '=' + JSON.stringify(worksheet[sheet])) + '\n';
+            }
+        };
+        return output;
+    }
+}
+
+
+let xl = new Excell();
+let details = xl.processFile('checker.xlsx');
+document.getElementById('excel-file').innerText = details;
 
 /* set up drag-and-drop event */
 // function handleDrop(e) {
