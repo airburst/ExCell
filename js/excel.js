@@ -14,6 +14,9 @@ class Excell {
 
         for (let name of sheetNames) {
             let worksheet = workbook.Sheets[name];
+
+            // Test for named ranges
+
             for (let sheet in worksheet) {
                 /* all keys that do not begin with "!" correspond to cell addresses */
                 if (sheet[0] === '!') continue;
