@@ -17,7 +17,7 @@ export class Excel {
             let worksheet = workbook.Sheets[name];
             for (let cell in worksheet) {
                 if (cell[0] === '!') continue;
-                this.data.push(new Cell(name + '!' + cell, worksheet[cell]));
+                this.data.push(new Cell(name, cell, worksheet[cell]));
             }
         };
     }

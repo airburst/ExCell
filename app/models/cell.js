@@ -2,11 +2,12 @@ import {Comment} from './comment.js';
 
 export class Cell {
 
-    constructor(sheet = '', cellData = {}) {
+    constructor(sheet = '', ref = '', cellData = {}) {
         this.value = (cellData.v) ? cellData.v : '';
         this.type = (cellData.t) ? cellData.t : '';
         this.formula = (cellData.f) ? cellData.f : '';
         this.sheet = sheet;
+        this.ref = ref;
         this.depth = 0;
         this.comment = (cellData.c) ? this.getCommentData(cellData.c) : undefined;
     }
