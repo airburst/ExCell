@@ -329,15 +329,6 @@ class ExCell
         // Default - send back what we got in
         return ['sheet'=>$sheet, 'range'=>$name];
     }
-    
-    private function pluck($key, $data) {
-        return array_reduce($data, function($result, $array) use($key){
-            isset($array[$key]) &&
-            $result[] = $array[$key];
-
-            return $result;
-        }, array());
-    }
 
     private function array_msort($array, $cols) {
         $colarr = array();

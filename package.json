@@ -28,5 +28,7 @@
     "test": "electron-mocha build --renderer",
     "install-native": "node ./tasks/install_native_module"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^4.13.1"
+  }
 }

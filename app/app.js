@@ -13,6 +13,8 @@ let excel = new Excel();
 excel.loadFile('checker.xlsx');
 setDom('excel-file', JSON.stringify(excel.data));
 
+console.log(excel.dependencies('=SUM(A1:B2) + AVG(B1, B6, C2:C4)'));
+
 function setDom(el, value) {
     document.addEventListener('DOMContentLoaded', () => {
         document.getElementById(el).innerHTML = value;
