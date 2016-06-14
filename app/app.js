@@ -2,16 +2,16 @@
 //import env from './env';
 import {remote} from 'electron';
 import jetpack from 'fs-jetpack';
-import {Excell} from './excell.js';
+import {Excel} from './models/excel';
 
 var app = remote.app;
 var appDir = jetpack.cwd(app.getAppPath());
 //console.log('The author of this app is:', appDir.read('package.json', 'json').author);
 
 // Main
-let xl = new Excell();
-xl.processFile('checker.xlsx');
-setDom('excel-file', JSON.stringify(xl.data));
+let excel = new Excel();
+excel.loadFile('checker.xlsx');
+setDom('excel-file', JSON.stringify(excel.data));
 
 function setDom(el, value) {
     document.addEventListener('DOMContentLoaded', () => {

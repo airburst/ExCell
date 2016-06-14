@@ -2,14 +2,13 @@ import XLSX from 'xlsx';
 import {Comment} from './comment.js';
 import {Cell} from './cell';
 
-export class Excell {
+export class Excel {
 
     constructor() {
         this.data = [];
-        this.comments = [];
     }
 
-    processFile(fileName) {
+    loadFile(fileName) {
         let workbook = XLSX.readFile(fileName, {cellDates: true}); // TODO: Error check
         let sheetNames = workbook.SheetNames,
             output = '';
@@ -21,7 +20,6 @@ export class Excell {
                 this.data.push(new Cell(name + '!' + cell, worksheet[cell]));
             }
         };
-        console.log(JSON.stringify(this.data));
     }
 
     getDepth(ref = '', sheet = 0) {
