@@ -10,8 +10,8 @@ var appDir = jetpack.cwd(app.getAppPath());
 
 // Main
 let xl = new Excell();
-let details = xl.processFile('checker.xlsx');
-setDom('excel-file', details);
+xl.processFile('checker.xlsx');
+setDom('excel-file', JSON.stringify(xl.data));
 
 function setDom(el, value) {
     document.addEventListener('DOMContentLoaded', () => {

@@ -61,4 +61,14 @@ export class Comment {
     setCols(p) {
         if (p[0] === 'cols') { this.cols = p[1]; }
     }
+
+    data() {
+        return {
+            name: this.name,
+            type: this.type,
+            dataType: this.dataType,
+            rows: this.rows,
+            cols: this.cols
+        }
+    }
 }

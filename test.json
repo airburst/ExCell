@@ -1,0 +1,426 @@
+[
+    {
+        "t": "s",
+        "v": "Date",
+        "r": "Date",
+        "h": "Date",
+        "w": "Date"
+    },
+    {
+        "t": "s",
+        "v": "Version Number",
+        "r": "Version Number",
+        "h": "Version Number",
+        "w": "Version Number"
+    },
+    {
+        "t": "s",
+        "v": "Produced by",
+        "r": "Produced by",
+        "h": "Produced by",
+        "w": "Produced by"
+    },
+    {
+        "t": "s",
+        "v": "Comments",
+        "r": "Comments",
+        "h": "Comments",
+        "w": "Comments"
+    },
+    {
+        "t": "n",
+        "v": 42122,
+        "w": "28-Apr-15"
+    },
+    {
+        "t": "s",
+        "v": "1.0",
+        "r": "1.0",
+        "h": "1.0",
+        "w": "1.0"
+    },
+    {
+        "t": "s",
+        "v": "Tony Rogers",
+        "r": "Tony Rogers",
+        "h": "Tony Rogers",
+        "w": "Tony Rogers"
+    },
+    {
+        "t": "s",
+        "v": "Initial draft",
+        "r": "Initial draft",
+        "h": "Initial draft",
+        "w": "Initial draft"
+    },
+    {
+        "t": "s",
+        "v": "Eligibility Checker",
+        "r": "Eligibility Checker",
+        "h": "Eligibility Checker",
+        "w": "Eligibility Checker"
+    },
+    {
+        "t": "s",
+        "v": "Health",
+        "r": "Health",
+        "h": "Health",
+        "w": "Health"
+    },
+    {
+        "t": "n",
+        "v": 0,
+        "w": "0",
+        "c": [
+            {
+                "a": "Tony Rogers",
+                "t": "I:impairmentyesno\r\nDefault:0\r\n",
+                "r": "I:impairmentyesno\r\nDefault:0\r\n",
+                "h": "I:impairmentyesnoDefault: 0"}]},{"t":"n","v":0,"f":"VLOOKUP(B2,
+                K2: L4,
+                2,
+                FALSE)","w":"0"},{"t":"s","v":"Wellbeing","r":"Wellbeing","h":"Wellbeing","w":"Wellbeing"},{"t":"n","v":0,"w":"0"},{"t":"n","v":0,"w":"0"},{"t":"s","v":"Health","r":"Health","h":"Health","w":"Health"},{"t":"n","v":1,"w":"1"},{"t":"n","v":1000,"w":"1000"},{"t":"s","v":"yes","r":"yes","h":"yes","w":"yes"},{"t":"s","v":"Needs","r":"Needs","h":"Needs","w":"Needs"},{"t":"n","v":0,"w":"0"},{"t":"s","v":"Needs1","r":"Needs1","h":"Needs1","w":"Needs1"},{"t":"n","v":0,"f":"IF(IFERROR(SEARCH(\"0\", NEEDS), 0),1,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(B4>0,10,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 1,
+                "w": "1"
+            },
+            {
+                "t": "n",
+                "v": 4,
+                "w": "4"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "s",
+                "v": "no",
+                "r": "no",
+                "h": "no",
+                "w": "no"
+            },
+            {
+                "t": "s",
+                "v": "Needs2",
+                "r": "Needs2",
+                "h": "Needs2",
+                "w": "Needs2"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(IFERROR(SEARCH(\"1\", NEEDS), 0),1,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(B5>0,10,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 2,
+                "w": "2"
+            },
+            {
+                "t": "n",
+                "v": 3,
+                "w": "3"
+            },
+            {
+                "t": "s",
+                "v": "Needs3",
+                "r": "Needs3",
+                "h": "Needs3",
+                "w": "Needs3"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(IFERROR(SEARCH(\"2\", NEEDS), 0),1,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 3,
+                "w": "3"
+            },
+            {
+                "t": "n",
+                "v": 2,
+                "w": "2"
+            },
+            {
+                "t": "s",
+                "v": "Needs - each checkbox ticked = 10",
+                "r": "Needs - each checkbox ticked = 10",
+                "h": "Needs - each checkbox ticked = 10",
+                "w": "Needs - each checkbox ticked = 10"
+            },
+            {
+                "t": "s",
+                "v": "Needs4",
+                "r": "Needs4",
+                "h": "Needs4",
+                "w": "Needs4"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(IFERROR(SEARCH(\"3\", NEEDS), 0),1,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 4,
+                "w": "4"
+            },
+            {
+                "t": "n",
+                "v": 1,
+                "w": "1"
+            },
+            {
+                "t": "s",
+                "v": "Needs5",
+                "r": "Needs5",
+                "h": "Needs5",
+                "w": "Needs5"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(IFERROR(SEARCH(\"4\", NEEDS), 0),1,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 5,
+                "w": "5"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "s",
+                "v": "Needs6",
+                "r": "Needs6",
+                "h": "Needs6",
+                "w": "Needs6"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(IFERROR(SEARCH(\"5\", NEEDS), 0),1,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 6,
+                "w": "6"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "s",
+                "v": "Needs7",
+                "r": "Needs7",
+                "h": "Needs7",
+                "w": "Needs7"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(IFERROR(SEARCH(\"6\", NEEDS), 0),1,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 7,
+                "w": "7"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "s",
+                "v": "Needs8",
+                "r": "Needs8",
+                "h": "Needs8",
+                "w": "Needs8"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(IFERROR(SEARCH(\"7\", NEEDS), 0),1,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 8,
+                "w": "8"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "s",
+                "v": "Needs9",
+                "r": "Needs9",
+                "h": "Needs9",
+                "w": "Needs9"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(IFERROR(SEARCH(\"8\", NEEDS), 0),1,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 9,
+                "w": "9"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "s",
+                "v": "Needs10",
+                "r": "Needs10",
+                "h": "Needs10",
+                "w": "Needs10"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "f": "IF(IFERROR(SEARCH(\"9\", NEEDS), 0),1,0)",
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "n",
+                "v": 10,
+                "w": "10"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0"
+            },
+            {
+                "t": "s",
+                "v": "Wellbeing",
+                "r": "Wellbeing",
+                "h": "Wellbeing",
+                "w": "Wellbeing"
+            },
+            {
+                "t": "n",
+                "v": 0,
+                "w": "0",
+                "c": [
+                    {
+                        "a": "Tony Rogers",
+                        "t": "I:wellbeing\r\nDefault:0",
+                        "r": "I:wellbeing\r\nDefault:0",
+                        "h": "I:wellbeingDefault: 0"}]},{"t":"n","v":0,"f":"VLOOKUP(B14,
+                        F2: G13,
+                        2)","w":"0"},{"t":"s","v":"OutputTable","r":"OutputTable","h":"OutputTable","w":"OutputTable"},{"t":"s","v":"Youanswered","r":"Youanswered","h":"Youanswered","w":"Youanswered"},{"t":"s","v":"Score","r":"Score","h":"Score","w":"Score"},{"t":"n","v":0,"f":"SUM(C2: C14)","w":"0","c":[{"a":"TonyRogers","t":"O: eligibilityscore\r\n","r":"O: eligibilityscore\r\n","h":"O: eligibilityscore"}]},{"t":"s","v":"Eligibility","r":"Eligibility","h":"Eligibility","w":"Eligibility"},{"t":"s","v":"NOTELIGIBLE","f":"IF(AND(B19>1020,
+                        MOD(B19,
+                        10)>0),
+                        \"ELIGIBLE\",\"NOT ELIGIBLE\")",
+                        "h": "NOT ELIGIBLE",
+                        "w": "NOT ELIGIBLE",
+                        "c": [
+                            {
+                                "a": "Tony Rogers",
+                                "t": "O:eligibilityresult\r\n",
+                                "r": "O:eligibilityresult\r\n",
+                                "h": "O:eligibilityresult"}]},{"t":"s","v":"Text1","r":"Text1","h":"Text1","w":"Text1"},{"t":"s","v":"Youranswersindicateyoudon’tappeartohaveaneedforsocialcaresupportatthistime.","f":"IF($B$20=\"ELIGIBLE\", Text!B8,Text!B13)",
+                                "h": "Your answers indicate you don’t appear to have a need for social care support at this time.",
+                                "w": "Your answers indicate you don’t appear to have a need for social care support at this time.",
+                                "c": [
+                                    {
+                                        "a": "Mark Fairhurst",
+                                        "t": "Mark Fairhurst:\r\nO:Text1",
+                                        "r": "Mark Fairhurst:\r\nO:Text1",
+                                        "h": "Mark Fairhurst:O: Text1"}]},{"t":"s","v":"Text2","r":"Text2","h":"Text2","w":"Text2"},{"t":"s","v":"Youranswersshowthatyoucouldbenefitfromexploringsupportinyourlocalcommunity.","f":"IF($B$20=\"ELIGIBLE\", Text!B9,Text!B14)",
+                                        "h": "Your answers show that you could benefit from exploring support in your local community.",
+                                        "w": "Your answers show that you could benefit from exploring support in your local community.",
+                                        "c": [
+                                            {
+                                                "a": "Mark Fairhurst",
+                                                "t": "Mark Fairhurst:\r\nO:Text2",
+                                                "r": "Mark Fairhurst:\r\nO:Text2",
+                                                "h": "Mark Fairhurst:O: Text2"}]},{"t":"s","v":"Text3","r":"Text3","h":"Text3","w":"Text3"},{"t":"s","v":"Wehaveinformationonoursitethatwethinkyoumightfindhelpful.Youcanfindoutwhat'savailablebysearchingathttp: //doncaster.mylifetest.co.uk/.","f":"IF($B$20=\"ELIGIBLE\", Text!B10,Text!B15)","h":"We have information on our site that we think you might find helpful.  You can find out what's available by searching at http://doncaster.mylifetest.co.uk/.","w":"We have information on our site that we think you might find helpful.  You can find out what's available by searching at http://doncaster.mylifetest.co.uk/.","c":[{"a":"Mark Fairhurst","t":"Mark Fairhurst:\r\nO:Text3","r":"Mark Fairhurst:\r\nO:Text3","h":"Mark Fairhurst: O: Text3"}]},{"t":"s","v":"Text4","r":"Text4","h":"Text4","w":"Text4"},{"t":"s","v":"Youcanvisitourguidespagetoanswerafewsimplequestionsandcreateapersonalisedguide(athttp: //doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.  ","f":"IF($B$20=\"ELIGIBLE\", Text!B11,Text!B16)","h":"You can visit our guides page to answer a few simple questions and create a personalised guide (at http://doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.  ","w":"You can visit our guides page to answer a few simple questions and create a personalised guide (at http://doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.  ","c":[{"a":"Mark Fairhurst","t":"Mark Fairhurst:\r\nO:Text4","r":"Mark Fairhurst:\r\nO:Text4","h":"Mark Fairhurst: O: Text4"}]},{"c":[{"a":"Mark","t":"Mark: \r\nI: tenneeds\r\nDefault: '","r":"Mark: \r\nI: tenneeds\r\nDefault: '","h":"Mark: I: tenneedsDefault: '"}]},{"c":[{"a":"TonyRogers","t":"O: outputfieldname\r\n","r":"O: outputfieldname\r\n","h":"O: outputfieldname"}]},{"t":"s","v":"Eligible","r":"Eligible","h":"Eligible","w":"Eligible"},{"t":"s","v":"Youmaybeeligibleforsupportandwewouldrecommendafullassessmentofyourcareandsupportneeds.Youcancontactusforanassessmentbyfollowingthesesteps: \r\n\r\n1.ClickontheSubmitbuttonbelowandacopyofthisformwillbesenttoDoncasterCouncil.\r\n2.Wewouldinviteyoutocontactuson0 1952 459252todiscussyourcareandsupportneedsfurther.WeareopenfromMondaytoFridayfrom9amto5pm.\r\n\r\nIfyoudon'twanttoSubmittheformatthistime,
+                                                thenwehaveinformationonoursitethatwethinkyoumightfindhelpful: [
+                                                    InformationandGuidance
+                                                ](http: //doncaster.mylifetest.co.uk/)","r":"You may be eligible for support and we would recommend a full assessment of your care and support needs. You can contact us for an assessment by following these steps:  \r\n\r\n1. Click on the Submit button below and a copy of this form will be sent to Doncaster Council.\r\n2. We would invite you to contact us on 01952 459252 to discuss your care and support needs further.  We are open from Monday to Friday from 9am to 5pm.   \r\n\r\nIf you don't want to Submit  the form at this time, then we have information on our site that we think you might find helpful: [Information and Guidance](http://doncaster.mylifetest.co.uk/)","h":"You may be eligible for support and we would recommend a full assessment of your care and support needs. You can contact us for an assessment by following these steps:  \r\n\r\n1. Click on the Submit button below and a copy of this form will be sent to Doncaster Council.\r\n2. We would invite you to contact us on 01952 459252 to discuss your care and support needs further.  We are open from Monday to Friday from 9am to 5pm.   \r\n\r\nIf you don't want to Submit  the form at this time, then we have information on our site that we think you might find helpful: [Information and Guidance](http://doncaster.mylifetest.co.uk/)","w":"You may be eligible for support and we would recommend a full assessment of your care and support needs. You can contact us for an assessment by following these steps:  \r\n\r\n1. Click on the Submit button below and a copy of this form will be sent to Doncaster Council.\r\n2. We would invite you to contact us on 01952 459252 to discuss your care and support needs further.  We are open from Monday to Friday from 9am to 5pm.   \r\n\r\nIf you don't want to Submit  the form at this time, then we have information on our site that we think you might find helpful: [Information and Guidance](http://doncaster.mylifetest.co.uk/)"},{"t":"s","v":"Not Eligible","r":"Not Eligible","h":"Not Eligible","w":"Not Eligible"},{"t":"s","v":"Your answers indicate you don’t appear to have a need for social care support at this time\r\n\r\nYour answers show that you could benefit from exploring support in your local community.\r\n \r\nYou can find out what's available by searching: [our directory](http://doncaster.mylifetest.co.uk/)\r\n\r\nWe have information on our site that we think you might find helpful: [Information and Guidance](http://doncaster.mylifetest.co.uk/)\r\n\r\n\r\nYou can visit our guides page to answer a few simple questions and create a [Personalised guide](http://doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.\r\n\r\nClick on the **Submit** button and a copy of this form will be sent to Telford & Wrekin Council.","r":"Your answers indicate you donât appear to have a need for social care support at this time\r\n\r\nYour answers show that you could benefit from exploring support in your local community.\r\n \r\nYou can find out what's available by searching: [our directory](http://doncaster.mylifetest.co.uk/)\r\n\r\nWe have information on our site that we think you might find helpful: [Information and Guidance](http://doncaster.mylifetest.co.uk/)\r\n\r\n\r\nYou can visit our guides page to answer a few simple questions and create a [Personalised guide](http://doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.\r\n\r\nClick on the **Submit** button and a copy of this form will be sent to Telford & Wrekin Council.","h":"Your answers indicate you don’t appear to have a need for social care support at this time\r\n\r\nYour answers show that you could benefit from exploring support in your local community.\r\n \r\nYou can find out what's available by searching: [our directory](http://doncaster.mylifetest.co.uk/)\r\n\r\nWe have information on our site that we think you might find helpful: [Information and Guidance](http://doncaster.mylifetest.co.uk/)\r\n\r\n\r\nYou can visit our guides page to answer a few simple questions and create a [Personalised guide](http://doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.\r\n\r\nClick on the **Submit** button and a copy of this form will be sent to Telford & Wrekin Council.","w":"Your answers indicate you don’t appear to have a need for social care support at this time\r\n\r\nYour answers show that you could benefit from exploring support in your local community.\r\n \r\nYou can find out what's available by searching: [our directory](http://doncaster.mylifetest.co.uk/)\r\n\r\nWe have information on our site that we think you might find helpful: [Information and Guidance](http://doncaster.mylifetest.co.uk/)\r\n\r\n\r\nYou can visit our guides page to answer a few simple questions and create a [Personalised guide](http://doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.\r\n\r\nClick on the **Submit** button and a copy of this form will be sent to Telford & Wrekin Council."},{"t":"s","v":"Eligible1","r":"Eligible1","h":"Eligible1","w":"Eligible1"},{"t":"s","v":"You may be eligible for support and we would recommend a full assessment of your care and support needs. You can contact us for an assessment by following these steps:  ","r":"You may be eligible for support and we would recommend a full assessment of your care and support needs. You can contact us for an assessment by following these steps:  ","h":"You may be eligible for support and we would recommend a full assessment of your care and support needs. You can contact us for an assessment by following these steps:  ","w":"You may be eligible for support and we would recommend a full assessment of your care and support needs. You can contact us for an assessment by following these steps:  "},{"t":"s","v":"Eligible2","r":"Eligible2","h":"Eligible2","w":"Eligible2"},{"t":"s","v":"1. Click on the Submit button below and a copy of this form will be sent to Doncaster Council.","r":"1. Click on the Submit button below and a copy of this form will be sent to Doncaster Council.","h":"1. Click on the Submit button below and a copy of this form will be sent to Doncaster Council.","w":"1. Click on the Submit button below and a copy of this form will be sent to Doncaster Council."},{"t":"s","v":"Eligible3","r":"Eligible3","h":"Eligible3","w":"Eligible3"},{"t":"s","v":"2. We would invite you to contact us on 01952 459252 to discuss your care and support needs further.  We are open from Monday to Friday from 9am to 5pm.  ","r":"2. We would invite you to contact us on 01952 459252 to discuss your care and support needs further.  We are open from Monday to Friday from 9am to 5pm.  ","h":"2. We would invite you to contact us on 01952 459252 to discuss your care and support needs further.  We are open from Monday to Friday from 9am to 5pm.  ","w":"2. We would invite you to contact us on 01952 459252 to discuss your care and support needs further.  We are open from Monday to Friday from 9am to 5pm.  "},{"t":"s","v":"Eligible4","r":"Eligible4","h":"Eligible4","w":"Eligible4"},{"t":"s","v":"If you don't want to Submit  the form at this time, then we have information on our site that we think you might find helpful:  http://doncaster.mylifetest.co.uk/","r":"If you don't want to Submit  the form at this time, then we have information on our site that we think you might find helpful:  http://doncaster.mylifetest.co.uk/","h":"If you don't want to Submit  the form at this time, then we have information on our site that we think you might find helpful:  http://doncaster.mylifetest.co.uk/","w":"If you don't want to Submit  the form at this time, then we have information on our site that we think you might find helpful:  http://doncaster.mylifetest.co.uk/"},{"t":"s","v":"Not Eligible1","r":"Not Eligible1","h":"Not Eligible1","w":"Not Eligible1"},{"t":"s","v":"Your answers indicate you don’t appear to have a need for social care support at this time.","r":"Your answers indicate you donât appear to have a need for social care support at this time.","h":"Your answers indicate you don’t appear to have a need for social care support at this time.","w":"Your answers indicate you don’t appear to have a need for social care support at this time."},{"t":"s","v":"Not Eligible2","r":"Not Eligible2","h":"Not Eligible2","w":"Not Eligible2"},{"t":"s","v":"Your answers show that you could benefit from exploring support in your local community.","r":"Your answers show that you could benefit from exploring support in your local community.","h":"Your answers show that you could benefit from exploring support in your local community.","w":"Your answers show that you could benefit from exploring support in your local community."},{"t":"s","v":"Not Eligible3","r":"Not Eligible3","h":"Not Eligible3","w":"Not Eligible3"},{"t":"s","v":"We have information on our site that we think you might find helpful.  You can find out what's available by searching at http://doncaster.mylifetest.co.uk/.","r":"We have information on our site that we think you might find helpful.  You can find out what's available by searching at http://doncaster.mylifetest.co.uk/.","h":"We have information on our site that we think you might find helpful.  You can find out what's available by searching at http://doncaster.mylifetest.co.uk/.","w":"We have information on our site that we think you might find helpful.  You can find out what's available by searching at http://doncaster.mylifetest.co.uk/."},{"t":"s","v":"Not Eligible4","r":"Not Eligible4","h":"Not Eligible4","w":"Not Eligible4"},{"t":"s","v":"You can visit our guides page to answer a few simple questions and create a personalised guide (at http://doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.  ","r":"You can visit our guides page to answer a few simple questions and create a personalised guide (at http://doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.  ","h":"You can visit our guides page to answer a few simple questions and create a personalised guide (at http://doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.  ","w":"You can visit our guides page to answer a few simple questions and create a personalised guide (at http://doncaster.mylifetest.co.uk/guides/guides.aspx) that you can print off, save or email.  "}] 
