@@ -55,13 +55,9 @@ export class Excel {
         }
     }
 
-    getCellByRef(ref = '', sheet = '') {
-        let refCollection = this.pluck('ref', this.data),
-            keys = this.filter(refCollection, ref);
-
-        for (let key of keys) {
-            if (this.data[key]['sheet'] === sheet) { return this.data[key]; }
-        };
-        return null;
+    getCellByRef(sheet = '', ref = '') {
+        return this.data.filter((d) => {
+            return (d.sheet === sheet && d.ref === ref);
+        })[0];
     }
 }

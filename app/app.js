@@ -12,7 +12,6 @@ let appDir = jetpack.cwd(app.getAppPath());
 let excel = new Excel();
 excel.loadFile('checker.xlsx');
 setDom('excel-file', JSON.stringify(excel.data));
-console.log(excel.getCellByRef('B2', 'Calculation'));
 
 function setDom(el, value) {
     document.addEventListener('DOMContentLoaded', () => {
@@ -60,10 +59,3 @@ function setDom(el, value) {
 //   }
 // }
 // input_dom_element.addEventListener('change', handleFile, false);
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     document.getElementById('greet').innerHTML = greet();
-//     document.getElementById('platform-info').innerHTML = os.platform();
-//     document.getElementById('env-name').innerHTML = env.name;
-// });

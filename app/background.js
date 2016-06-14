@@ -26,8 +26,8 @@ app.on('ready', function () {
     setApplicationMenu();
 
     var mainWindow = createWindow('main', {
-        width: 1000,
-        height: 600
+        width: 1200,
+        height: 900
     });
 
     mainWindow.loadURL('file://' + __dirname + '/app.html');
