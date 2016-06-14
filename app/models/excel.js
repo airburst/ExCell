@@ -8,6 +8,7 @@ export class Excel {
         this.data = [];
     }
 
+    // Load data with non-empty cells    
     loadFile(fileName) {
         let workbook = XLSX.readFile(fileName, {cellDates: true}); // TODO: Error check
         let sheetNames = workbook.SheetNames,
@@ -20,6 +21,7 @@ export class Excel {
                 this.data.push(new Cell(name, cell, worksheet[cell]));
             }
         };
+        // TODO: free up memory from XLSX object?
     }
 
     getDepth(ref = '', sheet = 0) {
@@ -51,5 +53,15 @@ export class Excel {
             i = this.getCellIndexByRef(ref, sheet);            
             this.data[i]['d'] = depth;          
         }
+    }
+
+    getCellByRef(ref = '', sheet = '') {
+        let refCollection = this.pluck('ref', this.data),
+            keys = this.filter(refCollection, ref);
+
+        for (let key of keys) {
+            if (this.data[key]['sheet'] === sheet) { return this.data[key]; }
+        };
+        return null;
     }
 }

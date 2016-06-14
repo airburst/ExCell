@@ -12,6 +12,7 @@ let appDir = jetpack.cwd(app.getAppPath());
 let excel = new Excel();
 excel.loadFile('checker.xlsx');
 setDom('excel-file', JSON.stringify(excel.data));
+console.log(excel.getCellByRef('B2', 'Calculation'));
 
 function setDom(el, value) {
     document.addEventListener('DOMContentLoaded', () => {
