@@ -12,7 +12,7 @@ export class Excel {
 
     // Load data with non-empty cells    
     loadFile(fileName) {
-        let workbook = XLSX.readFile(fileName, {cellDates: true}); // TODO: Error check
+        let workbook = XLSX.readFile(fileName, { cellDates: true }); // TODO: Error check
         let sheetNames = workbook.SheetNames,
             output = '';
 
@@ -46,32 +46,31 @@ export class Excel {
         return depth;
     }
 
-    // Takes a range and returns an array of dependent cells ["sheet", "ref"]
+    // Takes a formula and returns an array of dependent cells
     dependencies(formula = '', sheet = '') {
-        let d = [],
-            ranges = this.parser.getRangeTokens(formula);
-console.log(ranges);
-        // cells = this.explodeRange(token.value, sheet);
-        // foreach (cells as cell) {
-        //     array_push(d, cell);
-        // }
-        return d;
+        let ranges = this.parser.getRangeTokens(formula);
+        return ranges.map((r) => {
+            return this.explodeRange(r, sheet);
+        });
     }
 
-    // getRangeTokens(formula = '') {
-    //     let tokens = this.parser.getTokens(formula);
-    //     return tokens.items.filter((t) => {
-    //         return t.subtype === "range"
-    //     }).map((r) => {
-    //         return r.value;
-    //     });
-    // }
-
-    setDepth(sheet = '', ref = null, depth) {
-        if (ref !== null) {
-            let cell = this.getCellByRef(sheet, ref);            
-            cell.setDepth(depth);        
+    // Expands a range into an array of cells
+    explodeRange(range = '', sheet = '') {
+        let parts = [];
+        // Split out any sheet refs like Sheet1!A1:B2
+        let r = range.split('!');
+        if (r.length === 2) {
+            range = r[1];
+            sheet = r[0];
         }
+        let cells = XLSX.utils.decode_range(range);     // Refactor this into another function
+        for (let row = cells.s.r; row <= cells.e.r; ++row) {
+            for (let col = cells.s.c; col <= cells.e.c; ++col) {
+                let ref = XLSX.utils.encode_cell({ c: col, r: row });
+                parts.push(this.getCellByRef(sheet, ref));
+            }
+        }
+        return parts;
     }
 
     getCellByRef(sheet = '', ref = '') {
