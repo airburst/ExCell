@@ -8,7 +8,7 @@ class Excell {
     }
 
     processFile(fileName) {
-        let workbook = XLSX.readFile(fileName); // TODO: Error check
+        let workbook = XLSX.readFile(fileName, {cellDates: true}); // TODO: Error check
         let sheetNames = workbook.SheetNames,
             output = '';
 
