@@ -56,16 +56,17 @@ export class Solver {
 
     mapInputsToData(inputs) {
         for (let i of inputs) {
-            console.log('input: ', i);
             let inputRef = this.getInputRefByName(i.name);
-            console.log('inputRef: ', inputRef);
-            let cell = this.model.getCellByRef(inputRef.sheet, inputRef.ref);
-            console.log('cell: ', cell);
+            if (inputRef) {
+                let cell = this.model.getCellByRef(inputRef.sheet, inputRef.ref);
+                cell.setValue(i.value);
+                console.log('cell: ', cell);
+            }
         }
     }
 
     getInputRefByName(name) {
-        return this.inputs().filter((i) => { return i.name === name; });
+        return this.inputs().filter((i) => { return i.name === name; })[0];
     }
 
 }

@@ -30,6 +30,10 @@ export class Cell {
         return ((this.comment !== undefined) && (this.comment.type === 'O'));
     }
 
+    setValue(val) {
+        this.value = val;
+    }
+
     setInput(flag) {
         this.input = flag;
     }

@@ -46,7 +46,7 @@ export class Comment {
     setType(p) {
         if ((p[0] === 'I') || (p[0] === 'O')) {
             this.type = p[0];
-            this.name = p[1];
+            this.name = p[1].trim();
         }
     }
 
