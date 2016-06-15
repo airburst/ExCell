@@ -1,5 +1,6 @@
 import XLSX from 'xlsx';
 import Parser from '../parser';
+import {flatten} from '../utils';
 import {Comment} from './comment.js';
 import {Cell} from './cell';
 
@@ -34,6 +35,12 @@ export class Excel {
         // TODO: free up memory from XLSX object?
     }
 
+    calculateDepths() {
+        for (let cell of this.outputs()) {
+            if (cell.isFormula()) { console.log(cell.sheet, cell.ref, cell.formula, this.dependencies(cell)); }
+        }
+    }
+
     getDepth(sheet = '', ref = '') {
         let cell = this.getCellByRef(sheet, ref);
         if (cell === undefined) { return undefined; }
@@ -55,11 +62,13 @@ export class Excel {
     }
 
     // Takes a formula and returns an array of dependent cells
-    dependencies(formula = '', sheet = '') {
-        let ranges = this.parser.getRangeTokens(formula);
-        return ranges.map((r) => {
-            return this.explodeRange(sheet, r);
-        });
+    dependencies(cell) {
+        let ranges = this.parser.getRangeTokens(cell.formula);
+        return flatten(
+            ranges.map((r) => {
+                return this.explodeRange(cell.sheet, r);
+            })
+        );
     }
 
     // Expands a range into an array of cells
