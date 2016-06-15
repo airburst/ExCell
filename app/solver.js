@@ -51,18 +51,19 @@ export class Solver {
 
     solve(inputs = testInputs) {
         this.mapInputsToData(inputs);
-        return [];
+        return []; //outputs
     }
 
     mapInputsToData(inputs) {
         for (let i of inputs) {
             let inputRef = this.getInputRefByName(i.name);
-            if (inputRef) {
-                let cell = this.model.getCellByRef(inputRef.sheet, inputRef.ref);
-                cell.setValue(i.value);
-                console.log('cell: ', cell);
-            }
+            if (inputRef) { let cell = this.setCellValueByRef(inputRef.sheet, inputRef.ref, i.value); }
         }
+    }
+
+    setCellValueByRef(sheet, ref, value) {
+        let cell = this.model.getCellByRef(sheet, ref);
+        cell.setValue(value);   // May need to error-check
     }
 
     getInputRefByName(name) {
