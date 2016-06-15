@@ -5,6 +5,7 @@ import jetpack from 'fs-jetpack';
 import {setDomValue, showElement, hideElement} from './ui';
 import {Excel} from './models/excel';
 import {arrayToString} from './utils';
+import {Solver} from './solver';
 
 let app = remote.app;
 let appDir = jetpack.cwd(app.getAppPath());
@@ -56,6 +57,9 @@ function loadFile(file) {
     excel.loadFile(file);
     excel.calculateDepths();
     displayInfo(excel);
+
+    let solver = new Solver(excel);
+    solver.solve();
 }
 
 function displayInfo(excel) {
