@@ -2,6 +2,7 @@
 //import env from './env';
 import {remote} from 'electron';
 import jetpack from 'fs-jetpack';
+import {setDomValue} from './ui';
 import {Excel} from './models/excel';
 import {arrayToString} from './utils';
 
@@ -15,18 +16,12 @@ excel.loadFile('checker.xlsx');
 excel.calculateDepths();
 let sortedFormulaList = excel.formulaeByDepth();
 
-setDom('input-count', excel.inputs().length);
-setDom('inputs', arrayToString(excel.inputs().map((i) => { return i.comment.name; })));
-setDom('output-count', excel.outputs().length);
-setDom('outputs', arrayToString(excel.outputs().map((o) => { return o.comment.name; })));
-setDom('formula-count', sortedFormulaList.length);
-setDom('formulae', arrayToString(sortedFormulaList));
-
-function setDom(el, value) {
-    document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById(el).innerHTML = value;
-    });
-};
+setDomValue('input-count', excel.inputs().length);
+setDomValue('inputs', arrayToString(excel.inputs().map((i) => { return i.comment.name; })));
+setDomValue('output-count', excel.outputs().length);
+setDomValue('outputs', arrayToString(excel.outputs().map((o) => { return o.comment.name; })));
+setDomValue('formula-count', sortedFormulaList.length);
+setDomValue('formulae', arrayToString(sortedFormulaList));
 
 
 /* set up drag-and-drop event */
