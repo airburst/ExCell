@@ -8,6 +8,7 @@ export class Excel {
 
     constructor() {
         this.data = [];
+        this.errors = [];
         this.parser = new Parser();
     }
 
@@ -22,11 +23,16 @@ export class Excel {
     formulaeByDepth() {
         return this.cellsWithDepth()
             .sort(function(a,b) { return (a.depth > b.depth) ? 1 : ((b.depth > a.depth) ? -1 : 0);} )
-            .map((cell) => { return cell.formula; });
+            .map((cell) => { return cell.ref + '=' + cell.formula; });
     }
 
     cellsWithDepth() {
         return this.data.filter((c) => { return c.depth > 0; });
+    }
+
+    addError(type = '', message = '', cell = undefined) {
+        this.errors.push({type: type, message: message, cell: cell});
+        console.error(type + ': ' +  message + '.  Cell ref: ' + cell);
     }
 
     // Load data with non-empty cells    
@@ -42,7 +48,6 @@ export class Excel {
                 this.data.push(new Cell(name, cell, worksheet[cell]));
             }
         };
-        // TODO: free up memory from XLSX object?
     }
 
     calculateDepths() {
@@ -71,10 +76,14 @@ export class Excel {
         );
     }
 
-    explodeRange(sheet = '', range = '') {
+    explodeRange(sheet, range) {
         let cleanRef = this.splitOutSheetName(sheet, range);
         let cellArray = XLSX.utils.decode_range(cleanRef.range);
-        return this.decodeCellsFromArray(cleanRef.sheet, cellArray);
+        let decoded = this.decodeCellsFromArray(cleanRef.sheet, cellArray);
+        if (decoded.length === 0) { 
+            this.addError('Cannot identify range', cleanRef.range);
+        }
+        return decoded;
     }
 
     decodeCellsFromArray(sheet, cellArray) {

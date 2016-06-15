@@ -13,8 +13,14 @@ let appDir = jetpack.cwd(app.getAppPath());
 let excel = new Excel();
 excel.loadFile('checker.xlsx');
 excel.calculateDepths();
-let sortedFormulaList = arrayToString(excel.formulaeByDepth());
-setDom('excel-file', sortedFormulaList);
+let sortedFormulaList = excel.formulaeByDepth();
+
+setDom('input-count', excel.inputs().length);
+setDom('inputs', arrayToString(excel.inputs().map((i) => { return i.comment.name; })));
+setDom('output-count', excel.outputs().length);
+setDom('outputs', arrayToString(excel.outputs().map((o) => { return o.comment.name; })));
+setDom('formula-count', sortedFormulaList.length);
+setDom('formulae', arrayToString(sortedFormulaList));
 
 function setDom(el, value) {
     document.addEventListener('DOMContentLoaded', () => {
