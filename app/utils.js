@@ -8,6 +8,8 @@ export const replaceAll = (find, replace, fullText) => {
 
 export const arrayToString = (array) => {
     let text = '';
-    for (let item of array) { text += JSON.stringify(item) + '\n'; }
+    for (let item of array) { 
+        text += (typeof(item) === 'object') ? JSON.stringify(item) + '\n': item + '\n'; 
+    }
     return text;
 }
