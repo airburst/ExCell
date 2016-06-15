@@ -3,6 +3,7 @@
 import {remote} from 'electron';
 import jetpack from 'fs-jetpack';
 import {Excel} from './models/excel';
+import {arrayToString} from './utils';
 
 let app = remote.app;
 let appDir = jetpack.cwd(app.getAppPath());
@@ -12,8 +13,8 @@ let appDir = jetpack.cwd(app.getAppPath());
 let excel = new Excel();
 excel.loadFile('checker.xlsx');
 excel.calculateDepths();
-
-console.log('Statements in order: ', excel.formulaeByDepth());
+let sortedFormulaList = arrayToString(excel.formulaeByDepth());
+setDom('excel-file', sortedFormulaList);
 
 function setDom(el, value) {
     document.addEventListener('DOMContentLoaded', () => {
