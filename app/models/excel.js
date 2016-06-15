@@ -19,6 +19,16 @@ export class Excel {
         return this.data.filter((c) => { return c.isOutput(); });
     }
 
+    formulaeByDepth() {
+        return this.cellsWithDepth()
+            .sort(function(a,b) { return (a.depth > b.depth) ? 1 : ((b.depth > a.depth) ? -1 : 0);} )
+            .map((cell) => { return cell.formula; });
+    }
+
+    cellsWithDepth() {
+        return this.data.filter((c) => { return c.depth > 0; });
+    }
+
     // Load data with non-empty cells    
     loadFile(fileName) {
         let workbook = XLSX.readFile(fileName, { cellDates: true }); // TODO: Error check
@@ -36,32 +46,22 @@ export class Excel {
     }
 
     calculateDepths() {
-        for (let cell of this.outputs()) {
-            if (cell.isFormula()) { console.log(cell.sheet, cell.ref, cell.formula, this.dependencies(cell)); }
-        }
+        for (let cell of this.outputs()) { this.getDepth(cell); }
     }
 
-    getDepth(sheet = '', ref = '') {
-        let cell = this.getCellByRef(sheet, ref);
-        if (cell === undefined) { return undefined; }
-        if (cell.isFormula()) { return 0; }
-        if (cell.depth > 0) { return cell.depth; }          // wrong order?
+    getDepth(cell) {
+        if (!cell || !cell.isFormula()) { return 0; }
+        if (cell.depth > 0) { return cell.depth; }
 
-        // Calculate recursively for the first time
-        let d = this.dependencies(cell.formula, sheet),
-            depth = 0,
+        let depth = 0,
             children = [];
 
-        for (i = 0; i < d.length; i++) {
-            children.push(this.getDepth(d[i].sheet, d[i].ref));
-        }
-
-        depth = 1 + max(children);
-        this.setDepth(sheet, ref, depth);   // side effect -- could use cell.setDepth()
+        for (let c of this.dependencies(cell)) { children.push(this.getDepth(c)); }
+        depth = 1 + Math.max.apply(null, children);
+        cell.setDepth(depth);
         return depth;
     }
 
-    // Takes a formula and returns an array of dependent cells
     dependencies(cell) {
         let ranges = this.parser.getRangeTokens(cell.formula);
         return flatten(
@@ -71,9 +71,8 @@ export class Excel {
         );
     }
 
-    // Expands a range into an array of cells
     explodeRange(sheet = '', range = '') {
-        let cleanRef = this.refactorSheetName(sheet, range);
+        let cleanRef = this.splitOutSheetName(sheet, range);
         let cellArray = XLSX.utils.decode_range(cleanRef.range);
         return this.decodeCellsFromArray(cleanRef.sheet, cellArray);
     }
@@ -89,8 +88,7 @@ export class Excel {
         return cells;
     }
 
-    // Split out any sheet refs like Sheet1!A1:B2
-    refactorSheetName(sheet, range) {
+    splitOutSheetName(sheet, range) {
         let r = range.split('!');
         if (r.length === 2) { return { sheet: r[0], range: r[1] }; }
         return { sheet: sheet, range: range };

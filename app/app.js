@@ -11,10 +11,9 @@ let appDir = jetpack.cwd(app.getAppPath());
 // Main
 let excel = new Excel();
 excel.loadFile('checker.xlsx');
-setDom('excel-file', JSON.stringify(excel.data));
-
 excel.calculateDepths();
-console.log(excel.dependencies('=SUM(Calculation!B4:B10) + Version!B1'));
+
+console.log('Statements in order: ', excel.formulaeByDepth());
 
 function setDom(el, value) {
     document.addEventListener('DOMContentLoaded', () => {
