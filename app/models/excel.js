@@ -36,8 +36,8 @@ export class Excel {
     }
 
     // Load data with non-empty cells    
-    loadFile(fileName) {
-        let workbook = XLSX.readFile(fileName, { cellDates: true }); // TODO: Error check
+    loadFile(file) {
+        let workbook = XLSX.read(file, {type: 'binary'}); // TODO: Error check
         let sheetNames = workbook.SheetNames,
             output = '';
 

@@ -2,7 +2,7 @@
 //import env from './env';
 import {remote} from 'electron';
 import jetpack from 'fs-jetpack';
-import {setDomValue} from './ui';
+import {setDomValue, showElement, hideElement} from './ui';
 import {Excel} from './models/excel';
 import {arrayToString} from './utils';
 
@@ -11,55 +11,61 @@ let appDir = jetpack.cwd(app.getAppPath());
 //console.log('The author of this app is:', appDir.read('package.json', 'json').author);
 
 // Main
-let excel = new Excel();
-excel.loadFile('checker.xlsx');
-excel.calculateDepths();
-let sortedFormulaList = excel.formulaeByDepth();
+document.addEventListener('DOMContentLoaded', () => {
+    let drop = document.getElementById('dropzone');
+    drop.addEventListener('drop', handleDrop, false);
+    if(drop.addEventListener) {
+        drop.addEventListener('dragenter', handleDragover, false);
+        drop.addEventListener('dragover', handleDragover, false);
+        drop.addEventListener('drop', handleDrop, false);
+    }
 
-setDomValue('input-count', excel.inputs().length);
-setDomValue('inputs', arrayToString(excel.inputs().map((i) => { return i.comment.name; })));
-setDomValue('output-count', excel.outputs().length);
-setDomValue('outputs', arrayToString(excel.outputs().map((o) => { return o.comment.name; })));
-setDomValue('formula-count', sortedFormulaList.length);
-setDomValue('formulae', arrayToString(sortedFormulaList));
+    let xlf = document.getElementById('xlf');
+    xlf.addEventListener('change', handleFile, false);
+});
 
+function handleDrop(e) {
+    console.log('dropped..');
+    e.stopPropagation();
+    e.preventDefault();
+    handleFile(e);
+}
 
-/* set up drag-and-drop event */
-// function handleDrop(e) {
-//   e.stopPropagation();
-//   e.preventDefault();
-//   var files = e.dataTransfer.files;
-//   var i,f;
-//   for (i = 0, f = files[i]; i != files.length; ++i) {
-//     var reader = new FileReader();
-//     var name = f.name;
-//     reader.onload = function(e) {
-//       var data = e.target.result;
+function handleDragover(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+}
 
-//       /* if binary string, read with type 'binary' */
-//       var workbook = XLSX.read(data, {type: 'binary'});
+function handleFile(e) {
+    let files = e.target.files;
+    let i, f;
+    for (i = 0, f = files[i]; i != files.length; ++i) {
+        let reader = new FileReader();
+        let name = f.name;
+        reader.onload = function(e) {
+            let data = e.target.result;
+            loadFile(data);
+        };
+        reader.readAsBinaryString(f);
+    }
+}
 
-//       /* DO SOMETHING WITH workbook HERE */
-//     };
-//     reader.readAsBinaryString(f);
-//   }
-// }
-// drop_dom_element.addEventListener('drop', handleDrop, false);
+function loadFile(file) {
+    let excel = new Excel();
+    excel.loadFile(file);
+    excel.calculateDepths();
+    displayInfo(excel);
+}
 
-// function handleFile(e) {
-//   var files = e.target.files;
-//   var i,f;
-//   for (i = 0, f = files[i]; i != files.length; ++i) {
-//     var reader = new FileReader();
-//     var name = f.name;
-//     reader.onload = function(e) {
-//       var data = e.target.result;
-
-//       var workbook = XLSX.read(data, {type: 'binary'});
-
-//       /* DO SOMETHING WITH workbook HERE */
-//     };
-//     reader.readAsBinaryString(f);
-//   }
-// }
-// input_dom_element.addEventListener('change', handleFile, false);
+function displayInfo(excel) {
+    setDomValue('input-count', excel.inputs().length);
+    setDomValue('inputs', arrayToString(excel.inputs().map((i) => { return i.comment.name; })));
+    setDomValue('output-count', excel.outputs().length);
+    setDomValue('outputs', arrayToString(excel.outputs().map((o) => { return o.comment.name; })));
+    let sortedFormulaList = excel.formulaeByDepth();
+    setDomValue('formula-count', sortedFormulaList.length);
+    setDomValue('formulae', arrayToString(sortedFormulaList));
+    showElement('info');
+    hideElement('load');
+}
