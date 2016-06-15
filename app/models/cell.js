@@ -22,6 +22,22 @@ export class Cell {
         return (this.formula.length > 0);
     }
 
+    isInput() {
+        return ((this.comment !== undefined) && (this.comment.type === 'I'));
+    }
+
+    isOutput() {
+        return ((this.comment !== undefined) && (this.comment.type === 'O'));
+    }
+
+    setInput(flag) {
+        this.input = flag;
+    }
+
+    setOuput(flag) {
+        this.output = flag;
+    }
+
     setDepth(depth) {
         this.depth = depth;
     }

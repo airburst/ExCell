@@ -10,6 +10,14 @@ export class Excel {
         this.parser = new Parser();
     }
 
+    inputs() {
+        return this.data.filter((c) => { return c.isInput(); });
+    }
+
+    outputs() {
+        return this.data.filter((c) => { return c.isOutput(); });
+    }
+
     // Load data with non-empty cells    
     loadFile(fileName) {
         let workbook = XLSX.readFile(fileName, { cellDates: true }); // TODO: Error check
@@ -50,27 +58,33 @@ export class Excel {
     dependencies(formula = '', sheet = '') {
         let ranges = this.parser.getRangeTokens(formula);
         return ranges.map((r) => {
-            return this.explodeRange(r, sheet);
+            return this.explodeRange(sheet, r);
         });
     }
 
     // Expands a range into an array of cells
-    explodeRange(range = '', sheet = '') {
-        let parts = [];
-        // Split out any sheet refs like Sheet1!A1:B2
-        let r = range.split('!');
-        if (r.length === 2) {
-            range = r[1];
-            sheet = r[0];
-        }
-        let cells = XLSX.utils.decode_range(range);     // Refactor this into another function
-        for (let row = cells.s.r; row <= cells.e.r; ++row) {
-            for (let col = cells.s.c; col <= cells.e.c; ++col) {
+    explodeRange(sheet = '', range = '') {
+        let cleanRef = this.refactorSheetName(sheet, range);
+        let cellArray = XLSX.utils.decode_range(cleanRef.range);
+        return this.decodeCellsFromArray(cleanRef.sheet, cellArray);
+    }
+
+    decodeCellsFromArray(sheet, cellArray) {
+        let cells = [];
+        for (let row = cellArray.s.r; row <= cellArray.e.r; ++row) {
+            for (let col = cellArray.s.c; col <= cellArray.e.c; ++col) {
                 let ref = XLSX.utils.encode_cell({ c: col, r: row });
-                parts.push(this.getCellByRef(sheet, ref));
+                cells.push(this.getCellByRef(sheet, ref));
             }
         }
-        return parts;
+        return cells;
+    }
+
+    // Split out any sheet refs like Sheet1!A1:B2
+    refactorSheetName(sheet, range) {
+        let r = range.split('!');
+        if (r.length === 2) { return { sheet: r[0], range: r[1] }; }
+        return { sheet: sheet, range: range };
     }
 
     getCellByRef(sheet = '', ref = '') {

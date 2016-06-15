@@ -13,6 +13,8 @@ let excel = new Excel();
 excel.loadFile('checker.xlsx');
 setDom('excel-file', JSON.stringify(excel.data));
 
+console.log('Inputs: ', excel.inputs());
+console.log('Outputs: ', excel.outputs());
 console.log(excel.dependencies('=SUM(Calculation!B4:B10) + Version!B1'));
 
 function setDom(el, value) {
