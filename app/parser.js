@@ -1,61 +1,3 @@
-// function parseFormula() {
-
-//     let indentCount = 0;
-
-//     let indent = function () {
-//         let s = '|';
-//         for (let i = 0; i < indentCount; i++) {
-//             s += '&nbsp;&nbsp;&nbsp;|';
-//         }
-//         return s;
-//     };
-
-//     let formulaControl = document.getElementById('formula');
-//     let formula = formulaControl.value;
-
-//     let tokens = getTokens(formula);
-
-//     let tokensHtml = '';
-
-//     tokensHtml += '<table cellspacing=\'0\' style=\'border-top: 1px #cecece solid; margin-top: 5px; margin-bottom: 5px\'>';
-//     tokensHtml += '<tr>';
-//     tokensHtml += '<td class=\'token\' style=\'font-weight: bold; width: 50px\'>index</td>';
-//     tokensHtml += '<td class=\'token\' style=\'font-weight: bold; width: 125px\'>type</td>';
-//     tokensHtml += '<td class=\'token\' style=\'font-weight: bold; width: 125px\'>subtype</td>';
-//     tokensHtml += '<td class=\'token\' style=\'font-weight: bold; width: 150px\'>token</td>';
-//     tokensHtml += '<td class=\'token\' style=\'font-weight: bold; width: 300px\'>token tree</td></tr>';
-
-//     while (tokens.moveNext()) {
-
-//         let token = tokens.current();
-
-//         if (token.subtype == TOK_SUBTYPE_STOP)
-//             indentCount -= ((indentCount > 0) ? 1 : 0);
-
-//         tokensHtml += '<tr>';
-
-//         tokensHtml += '<td class=\'token\'>' + (tokens.index + 1) + '</td>';
-
-//         tokensHtml += '<td class=\'token\'>' + token.type + '</td>';
-//         tokensHtml += '<td class=\'token\'>' + ((token.subtype.length == 0) ? '&nbsp;' : token.subtype) + '</td>';
-//         tokensHtml += '<td class=\'token\'>' + ((token.value.length == 0) ? '&nbsp;' : token.value).split(' ').join('&nbsp;') + '</td>';
-//         tokensHtml += '<td class=\'token\'>' + indent() + ((token.value.length == 0) ? '&nbsp;' : token.value).split(' ').join('&nbsp;') + '</td>';
-
-//         tokensHtml += '</tr>';
-
-//         if (token.subtype == TOK_SUBTYPE_START)
-//             indentCount += 1;
-
-//     }
-
-//     tokensHtml += '</table>';
-
-//     document.getElementById('tokens').innerHTML = tokensHtml;
-
-//     formulaControl.select();
-//     formulaControl.focus();
-
-// }
 const TOK_TYPE_NOOP = 'noop';
 const TOK_TYPE_OPERAND = 'operand';
 const TOK_TYPE_FUNCTION = 'function';
@@ -179,11 +121,9 @@ export default class Parser {
 
     getRangeTokens(formula = '') {
         let tokens = this.getTokens(formula);
-        return tokens.items.filter((t) => {
-            return t.subtype === "range"
-        }).map((r) => {
-            return r.value;
-        });
+        return tokens.items
+            .filter((t) => { return t.subtype === "range" })
+            .map((r) => { return r.value; });
     }
 
     getTokens(formula) {
