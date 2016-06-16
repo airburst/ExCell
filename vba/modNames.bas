@@ -3,6 +3,8 @@ Option Explicit
 
 Sub main()
     Dim namesList() As Variant
+
+    Application.ScreenUpdating = False
     
     If hasNames Then
         namesList = getNames()
@@ -13,6 +15,8 @@ Sub main()
     Else
         Call MsgBox("No named ranges in this workbook.  Nothing to do.", vbOKOnly, "Done")
     End If
+
+    Application.ScreenUpdating = True
 End Sub
 
 Function hasNames() As Boolean
@@ -78,8 +82,8 @@ End Function
 Sub deleteAllNamedRanges()
     Dim i As Integer
     For i = 1 To ActiveWorkbook.names.Count
-        If isValidName(ActiveWorkbook.names(i).NameLocal) Then
-            ActiveWorkbook.names(i).Delete
+        If isValidName(ActiveWorkbook.names(1).NameLocal) Then
+            ActiveWorkbook.names(1).Delete
         End If
     Next i
 End Sub

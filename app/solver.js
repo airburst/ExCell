@@ -72,8 +72,8 @@ export class Solver {
     runFormulaeInSequence() {
         for (let f of this.model.formulaeByDepth()) {
             let p = this.model.precendants(f.cell);
-            console.log(p);
-            console.log(f.expression, p.map((c) => { return this.model.getCellValue(c); }));
+            //console.log(p);
+            //console.log(f.expression, p.map((c) => { return this.model.getCellValue(c); }));
         }
         // this.model.setCellValueByRef('Version', 'A22', 'Mark');
         // console.log(this.model.getCellValueByRef('Version', 'A22'));

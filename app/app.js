@@ -67,7 +67,7 @@ function displayInfo(excel) {
     setDomValue('inputs', arrayToString(excel.inputs().map((i) => { return i.comment.name; })));
     setDomValue('output-count', excel.outputs().length);
     setDomValue('outputs', arrayToString(excel.outputs().map((o) => { return o.comment.name; })));
-    let sortedFormulaList = excel.formulaeByDepth();
+    let sortedFormulaList = excel.formulaeByDepth().map((f) => { return f.expression; });
     setDomValue('formula-count', sortedFormulaList.length);
     setDomValue('formulae', arrayToString(sortedFormulaList));
     showElement('info');
