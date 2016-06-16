@@ -23,7 +23,7 @@ export class Excel {
     formulaeByDepth() {
         return this.cellsWithDepth()
             .sort(function(a,b) { return (a.depth > b.depth) ? 1 : ((b.depth > a.depth) ? -1 : 0);} )
-            .map((cell) => { return cell.ref + '=' + cell.formula; });
+            .map((cell) => { return {cell: cell, expression: cell.formula}; });
     }
 
     cellsWithDepth() {
@@ -103,9 +103,30 @@ export class Excel {
         return { sheet: sheet, range: range };
     }
 
-    getCellByRef(sheet = '', ref = '') {
+    getCellByRef(sheet, ref) {
         return this.data.filter((d) => {
             return (d.sheet === sheet && d.ref === ref);
         })[0];
+    }
+
+    getCellIndexByRef(sheet, ref) {
+        let cell = this.getCellByRef(sheet, ref);
+        if (!cell) { return undefined; }
+        return this.data.indexOf(cell);
+    }
+
+    getCellValueByRef(sheet, ref) {
+        let cell = this.getCellByRef(sheet, ref);
+        if (!cell) { return undefined; }
+        return cell.value;
+    }
+
+    setCellValue(cell, value) {
+        if (cell) { cell.value = value; }
+    }
+
+    setCellValueByRef(sheet, ref, value) {
+        let cell = this.getCellByRef(sheet, ref);
+        if (cell) { cell.value = value; }
     }
 }

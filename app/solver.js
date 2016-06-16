@@ -51,23 +51,29 @@ export class Solver {
 
     solve(inputs = testInputs) {
         this.mapInputsToData(inputs);
+        this.runFormulaeInSequence();
         return []; //outputs
     }
 
     mapInputsToData(inputs) {
         for (let i of inputs) {
             let inputRef = this.getInputRefByName(i.name);
-            if (inputRef) { let cell = this.setCellValueByRef(inputRef.sheet, inputRef.ref, i.value); }
+            if (inputRef) { 
+                let cell = this.model.setCellValueByRef(inputRef.sheet, inputRef.ref, i.value); 
+            }
         }
-    }
-
-    setCellValueByRef(sheet, ref, value) {
-        let cell = this.model.getCellByRef(sheet, ref);
-        cell.setValue(value);   // May need to error-check
     }
 
     getInputRefByName(name) {
         return this.inputs().filter((i) => { return i.name === name; })[0];
+    } 
+
+    runFormulaeInSequence() {
+        for (let expression of this.model.formulaeByDepth()) {
+
+        }
+        // this.model.setCellValueByRef('Version', 'A22', 'Mark');
+        // console.log(this.model.getCellValueByRef('Version', 'A22'));
     }
 
 }
