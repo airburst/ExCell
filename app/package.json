@@ -10,6 +10,7 @@
     "bootstrap": "^3.3.6",
     "excel-formula": "^1.2.1",
     "formulafoundry": "^0.1.0",
+    "formulajs": "^1.0.7",
     "fs-jetpack": "^0.9.0",
     "functionfoundry": "^0.9.13",
     "xlsx": "^0.8.0"
