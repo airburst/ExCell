@@ -3,13 +3,23 @@ import {Comment} from './comment.js';
 export class Cell {
 
     constructor(sheet = '', ref = '', cellData = {}) {
-        this.value = (cellData.v) ? cellData.v : '';
         this.type = (cellData.t) ? cellData.t : '';
+        this.value = this.initialiseValueByType(this.type, cellData.v);
         this.formula = (cellData.f) ? cellData.f : '';
         this.sheet = sheet;
         this.ref = ref;
         this.depth = 0;
         this.comment = (cellData.c) ? this.getCommentData(cellData.c) : undefined;
+    }
+
+    initialiseValueByType(type, value) {
+        if ((value) && (value !== undefined) && (value !== null) && (value !== '')) { return value; }
+        return this.castInitialValue(type);
+    }
+
+    castInitialValue(type) {
+        if ((type === 'n') || (type === 'n')) { return 0; }
+        return '';
     }
 
     getCommentData(commentText) {

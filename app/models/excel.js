@@ -61,13 +61,13 @@ export class Excel {
         let depth = 0,
             children = [];
 
-        for (let c of this.dependencies(cell)) { children.push(this.getDepth(c)); }
+        for (let c of this.precendants(cell)) { children.push(this.getDepth(c)); }
         depth = 1 + Math.max.apply(null, children);
         cell.setDepth(depth);
         return depth;
     }
 
-    dependencies(cell) {
+    precendants(cell) {
         let ranges = this.parser.getRangeTokens(cell.formula);
         return flatten(
             ranges.map((r) => {
@@ -117,16 +117,19 @@ export class Excel {
 
     getCellValueByRef(sheet, ref) {
         let cell = this.getCellByRef(sheet, ref);
-        if (!cell) { return undefined; }
-        return cell.value;
+        return this.getCellValue(cell);
     }
 
-    setCellValue(cell, value) {
-        if (cell) { cell.value = value; }
+    getCellValue(cell) {
+        return (cell) ? cell.value : undefined;
     }
 
     setCellValueByRef(sheet, ref, value) {
         let cell = this.getCellByRef(sheet, ref);
+        this.setCellValue(cell, value)
+    }
+
+    setCellValue(cell, value) {
         if (cell) { cell.value = value; }
     }
 }
