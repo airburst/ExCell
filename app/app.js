@@ -58,16 +58,16 @@ function loadFile(file) {
     excel.calculateDepths();
     displayInfo(excel);
 
-    let solver = new Solver(excel);
-    solver.solve();
+    let solver = new Solver(excel); // inputs
+    solver.solve(); // WIP
 }
 
 function displayInfo(excel) {
     setDomValue('input-count', excel.inputs().length);
-    setDomValue('inputs', arrayToString(excel.inputs().map((i) => { return i.comment.name; })));
+    setDomValue('inputs', arrayToString(excel.inputs().map(i => i.comment.name)));
     setDomValue('output-count', excel.outputs().length);
-    setDomValue('outputs', arrayToString(excel.outputs().map((o) => { return o.comment.name; })));
-    let sortedFormulaList = excel.formulaeByDepth().map((f) => { return f.expression; });
+    setDomValue('outputs', arrayToString(excel.outputs().map(o => o.comment.name)));
+    let sortedFormulaList = excel.formulaeByDepth().map(f => f.expression);
     setDomValue('formula-count', sortedFormulaList.length);
     setDomValue('formulae', arrayToString(sortedFormulaList));
     showElement('info');

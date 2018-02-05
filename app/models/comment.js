@@ -15,16 +15,9 @@ export default class Comment {
     pairs() {
         const hasTwoParts = (pair) =>
             (pair.length > 1) && !this.isBlank(pair[1]);
-
         return this.lines()
             .map(line => line.split(':'))
             .filter(pair => hasTwoParts(pair));
-        // const pairs = [];
-        // for (let line of this.lines()) {
-        //     let pair = line.split(':');
-        //     if (hasTwoParts(pair)) { pairs.push(pair); }
-        // }
-        // return pairs;
     }
 
     isValid() {

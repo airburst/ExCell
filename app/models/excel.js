@@ -13,25 +13,25 @@ export class Excel {
     }
 
     inputs() {
-        return this.data.filter((c) => { return c.isInput(); });
+        return this.data.filter(c => c.isInput());
     }
 
     outputs() {
-        return this.data.filter((c) => { return c.isOutput(); });
+        return this.data.filter(c => c.isOutput());
     }
 
     formulaeByDepth() {
         return this.cellsWithDepth()
-            .sort(function (a, b) { return (a.depth > b.depth) ? 1 : ((b.depth > a.depth) ? -1 : 0); })
-            .map((cell) => { return { cell: cell, expression: cell.formula }; });
+            .sort((a, b) => { return (a.depth > b.depth) ? 1 : ((b.depth > a.depth) ? -1 : 0); })
+            .map((cell) => { return { cell, expression: cell.formula }; });
     }
 
     cellsWithDepth() {
-        return this.data.filter((c) => { return c.depth > 0; });
+        return this.data.filter(c => (c.depth > 0));
     }
 
     addError(type = '', message = '', cell = undefined) {
-        this.errors.push({ type: type, message: message, cell: cell });
+        this.errors.push({ type, message, cell });
         console.error(type + ': ' + message + '.  Cell ref: ' + cell);
     }
 
@@ -68,12 +68,8 @@ export class Excel {
     }
 
     precedents(cell) {
-        let ranges = this.parser.getRangeTokens(cell.formula);
-        return flatten(
-            ranges.map((r) => {
-                return this.explodeRange(cell.sheet, r);
-            })
-        );
+        const ranges = this.parser.getRangeTokens(cell.formula);
+        return flatten(ranges.map(r => this.explodeRange(cell.sheet, r)));
     }
 
     explodeRange(sheet, range) {
@@ -96,34 +92,32 @@ export class Excel {
     }
 
     splitOutSheetName(sheet, range) {
-        let r = range.split('!');
+        const r = range.split('!');
         if (r.length === 2) { return { sheet: r[0], range: r[1] }; }
-        return { sheet: sheet, range: range };
+        return { sheet, range };
     }
 
     getCellByRef(sheet, ref) {
-        return this.data.filter((d) => {
-            return (d.sheet === sheet && d.ref === ref);
-        })[0];
+        return this.data.filter(d => d.sheet === sheet && d.ref === ref)[0];
     }
 
     getCellIndexByRef(sheet, ref) {
-        let cell = this.getCellByRef(sheet, ref);
-        if (!cell) { return undefined; }
+        const cell = this.getCellByRef(sheet, ref);
+        if (!cell) { return null; }
         return this.data.indexOf(cell);
     }
 
     getCellValueByRef(sheet, ref) {
-        let cell = this.getCellByRef(sheet, ref);
+        const cell = this.getCellByRef(sheet, ref);
         return this.getCellValue(cell);
     }
 
     getCellValue(cell) {
-        return (cell) ? cell.value : undefined;
+        return (cell) ? cell.value : null;
     }
 
     setCellValueByRef(sheet, ref, value) {
-        let cell = this.getCellByRef(sheet, ref);
+        const cell = this.getCellByRef(sheet, ref);
         this.setCellValue(cell, value)
     }
 
