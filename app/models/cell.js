@@ -1,6 +1,6 @@
-import {Comment} from './comment.js';
+import Comment from './comment.js';
 
-export class Cell {
+export default class Cell {
 
     constructor(sheet = '', ref = '', cellData = {}) {
         this.type = (cellData.t) ? cellData.t : '';
@@ -8,24 +8,21 @@ export class Cell {
         this.formula = (cellData.f) ? cellData.f : '';
         this.sheet = sheet;
         this.ref = ref;
+        this.input = null;
+        this.output = null;
         this.depth = 0;
-        this.comment = (cellData.c) ? this.getCommentData(cellData.c) : undefined;
+        this.comment = (cellData.c) ? this.getCommentData(cellData.c) : null;
     }
 
     initialiseValueByType(type, value) {
-        if ((value) && (value !== undefined) && (value !== null) && (value !== '')) { return value; }
-        return this.castInitialValue(type);
-    }
-
-    castInitialValue(type) {
-        if ((type === 'n') || (type === 'n')) { return 0; }
-        return '';
+        if (value && value !== '') { return value; }
+        return (type === 'n') ? 0 : '';
     }
 
     getCommentData(commentText) {
         let comment = new Comment(commentText[0].t.toString());
         comment.getData();
-        return comment.isValid() ? comment : undefined;
+        return comment.isValid() ? comment : null;
     }
 
     isFormula() {
@@ -33,11 +30,11 @@ export class Cell {
     }
 
     isInput() {
-        return ((this.comment !== undefined) && (this.comment.type === 'I'));
+        return (this.comment && this.comment.type === 'I');
     }
 
     isOutput() {
-        return ((this.comment !== undefined) && (this.comment.type === 'O'));
+        return (this.comment && this.comment.type === 'O');
     }
 
     setValue(val) {

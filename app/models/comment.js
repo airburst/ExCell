@@ -1,4 +1,4 @@
-export class Comment {
+export default class Comment {
     constructor(commentText = '') {
         this.fullText = commentText;
         this.name = '';
@@ -13,17 +13,18 @@ export class Comment {
     }
 
     pairs() {
-        let pairs = [],
-            self = this;
-        for (let line of this.lines()) {
-            let pair = line.split(':');
-            if (hasTwoParts(pair)) { pairs.push(pair); }
-        }
-        return pairs;
+        const hasTwoParts = (pair) =>
+            (pair.length > 1) && !this.isBlank(pair[1]);
 
-        function hasTwoParts(pair) {
-            return (pair.length > 1) && !self.isBlank(pair[1]);
-        }
+        return this.lines()
+            .map(line => line.split(':'))
+            .filter(pair => hasTwoParts(pair));
+        // const pairs = [];
+        // for (let line of this.lines()) {
+        //     let pair = line.split(':');
+        //     if (hasTwoParts(pair)) { pairs.push(pair); }
+        // }
+        // return pairs;
     }
 
     isValid() {
@@ -35,12 +36,12 @@ export class Comment {
     }
 
     getData() {
-        for (let p of this.pairs()) {
+        this.pairs().forEach(p => {
             this.setType(p);
             this.setDataType(p);
             this.setRows(p);
             this.setCols(p);
-        }
+        });
     }
 
     setType(p) {

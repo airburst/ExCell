@@ -1,8 +1,8 @@
 import XLSX from 'xlsx';
 import Parser from '../parser';
-import {flatten} from '../utils';
-import {Comment} from './comment.js';
-import {Cell} from './cell';
+import { flatten } from '../utils';
+import Comment from './comment.js';
+import Cell from './cell';
 
 export class Excel {
 
@@ -22,8 +22,8 @@ export class Excel {
 
     formulaeByDepth() {
         return this.cellsWithDepth()
-            .sort(function(a,b) { return (a.depth > b.depth) ? 1 : ((b.depth > a.depth) ? -1 : 0);} )
-            .map((cell) => { return {cell: cell, expression: cell.formula}; });
+            .sort(function (a, b) { return (a.depth > b.depth) ? 1 : ((b.depth > a.depth) ? -1 : 0); })
+            .map((cell) => { return { cell: cell, expression: cell.formula }; });
     }
 
     cellsWithDepth() {
@@ -31,13 +31,13 @@ export class Excel {
     }
 
     addError(type = '', message = '', cell = undefined) {
-        this.errors.push({type: type, message: message, cell: cell});
-        console.error(type + ': ' +  message + '.  Cell ref: ' + cell);
+        this.errors.push({ type: type, message: message, cell: cell });
+        console.error(type + ': ' + message + '.  Cell ref: ' + cell);
     }
 
     // Load data with non-empty cells    
     loadFile(file) {
-        let workbook = XLSX.read(file, {type: 'binary'}); // TODO: Error check
+        let workbook = XLSX.read(file, { type: 'binary' }); // TODO: Error check
         let sheetNames = workbook.SheetNames,
             output = '';
 
