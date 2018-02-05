@@ -1,6 +1,8 @@
-import * as functions from 'functionfoundry';
+import * as functions from 'formula'
 import Parser from './parser';
 import {Excel} from './models/excel';
+
+// console.log(functions.run('IF(IFERROR(SEARCH("6", "[1,3,5]", 0),1,0))'));
 
 const testInputs = [
     { name: 'tenneeds', value: '[1, 3, 5]' },
@@ -8,7 +10,6 @@ const testInputs = [
     { name: 'wellbeing', value: 3 },
     { name: 'bad-match', value: 'nothing' }
 ];
-
 
 export class Solver {
 
