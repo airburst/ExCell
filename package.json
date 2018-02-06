@@ -2,6 +2,7 @@
   "name": "excel",
   "version": "0.1.0",
   "dependencies": {
+    "excel-formula": "^1.4.2",
     "formula": "^2.3.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
