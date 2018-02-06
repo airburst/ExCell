@@ -7,7 +7,8 @@ import './App.css';
 const handleFile = (e) => {
   let files = e.target.files;
   let i, f;
-  for (i = 0, f = files[i]; i != files.length; ++i) {
+  for (i = 0, f = files[i]; i !== files.length; ++i) {
+    // eslint-disable-next-line no-undef
     let reader = new FileReader();
     // let name = f.name;
     reader.onload = function (e) {

@@ -2,8 +2,6 @@ import * as functions from 'formula'
 // import Parser from './parser';
 import Excel from '../models/excel';
 
-// console.log(functions.run('IF(IFERROR(SEARCH("6", "[1,3,5]", 0),1,0))'));
-
 const testInputs = [
     { name: 'tenneeds', value: '[1, 3, 5]' },
     { name: 'impairmentyesno', value: 0 },
@@ -61,7 +59,7 @@ export default class Solver {
         for (let i of inputs) {
             let inputRef = this.getInputRefByName(i.name);
             if (inputRef) {
-                let cell = this.model.setCellValueByRef(inputRef.sheet, inputRef.ref, i.value);
+                // let cell = this.model.setCellValueByRef(inputRef.sheet, inputRef.ref, i.value);
             }
         }
     }
@@ -71,11 +69,11 @@ export default class Solver {
     }
 
     runFormulaeInSequence() {
-        for (let f of this.model.formulaeByDepth()) {
-            let p = this.model.precedents(f.cell);
-            // console.log(p);
-            // console.log(f.expression, p.map(c => this.model.getCellValue(c)));
-        }
+        // for (let f of this.model.formulaeByDepth()) {
+        //     let p = this.model.precedents(f.cell);
+        //     console.log(p);
+        //     console.log(f.expression, p.map(c => this.model.getCellValue(c)));
+        // }
         // this.model.setCellValueByRef('Version', 'A22', 'Mark');
         // console.log(this.model.getCellValueByRef('Version', 'A22'));
     }
