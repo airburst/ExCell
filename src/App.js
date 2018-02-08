@@ -7,18 +7,31 @@ import InfoTable from './components/InfoTable';
 import './App.css';
 
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
       inputs: [],
       outputs: [],
       functions: [],
-    }
+    };
   }
 
-  handleFile = (file) => {
-    // eslint-disable-next-line no-undef
+  setInfo = excel => {
+    this.setState({
+      inputs: arrayToString(excel.inputs.map(i => i.comment.name)),
+      outputs: arrayToString(excel.outputs.map(i => i.comment.name)),
+      functions: excel.formulae.map(f => f.expression),
+    });
+  };
+
+  loadFile = file => {
+    const excel = new Excel(file);
+    this.setInfo(excel);
+    const solver = new Solver(excel); // inputs
+    solver.solve(); // WIP
+  };
+
+  handleFile = file => {
     const reader = new FileReader();
     reader.onload = () => {
       const data = reader.result;
@@ -27,25 +40,7 @@ class App extends Component {
     reader.onabort = () => console.log('file reading was aborted');
     reader.onerror = () => console.log('file reading has failed');
     reader.readAsBinaryString(file);
-  }
-
-  loadFile = (file) => {
-    let excel = new Excel();
-    excel.loadFile(file);
-    excel.calculateDepths();
-    this.setInfo(excel);
-
-    let solver = new Solver(excel); // inputs
-    solver.solve(); // WIP
-  }
-
-  setInfo = (excel) => {
-    this.setState({
-      inputs: arrayToString(excel.inputs().map(i => i.comment.name)),
-      outputs: arrayToString(excel.outputs().map(i => i.comment.name)),
-      functions: excel.formulaeByDepth().map(f => f.expression),
-    });
-  }
+  };
 
   render() {
     return (

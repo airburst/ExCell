@@ -35,6 +35,7 @@
         "props": false
       }
     ],
+    "linebreak-style": 0,
     "no-console": 0,
     "import/prefer-default-export": 0,
     "import": 0,
