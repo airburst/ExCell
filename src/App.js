@@ -29,7 +29,7 @@ class App extends Component {
     this.setInfo(excel);
     console.log(excel);
     const solver = new Solver(excel);
-    // solver.solve(); // WIP
+    console.log(solver.d);
   };
 
   handleFile = file => {

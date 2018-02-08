@@ -25,7 +25,6 @@ export default class Solver {
         this.d[`${cell.sheet}!${cell.ref}`] = cell.value;
       });
     });
-    console.log(this.d);
   }
 
   getInputRefByName(name) {
