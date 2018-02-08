@@ -71,7 +71,7 @@ export default class Excel {
     sheetNames.forEach(name => {
       const worksheet = workbook.Sheets[name];
       const d = Object.entries(worksheet)
-        .filter(([k, v]) => k[0] !== '!')
+        .filter(([k]) => k[0] !== '!')
         .map(([id, cell]) => new Cell(name, id, cell));
       this.data = [...this.data, ...d];
     });
