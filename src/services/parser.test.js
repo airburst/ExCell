@@ -10,6 +10,6 @@ describe('Parser Service', () => {
   test('finds all range tokens in a formula', () => {
     const r = parser.getRangeTokens('=(weight/(height*height))');
     expect(r.length).toBe(3);
-    expect(r).toMatchObject([ 'weight', 'height', 'height' ]);
+    expect(r).toMatchObject(['weight', 'height', 'height']);
   });
 });
