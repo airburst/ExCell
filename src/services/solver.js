@@ -1,79 +1,34 @@
-import * as functions from 'formula';
-// import Parser from './parser';
+// import { run } from 'formula';
+// import parser from './parser';
 import Excel from '../models/excel';
 
-const testInputs = [
-  { name: 'tenneeds', value: '[1, 3, 5]' },
-  { name: 'impairmentyesno', value: 0 },
-  { name: 'wellbeing', value: 3 },
-  { name: 'bad-match', value: 'nothing' },
-];
+// const testInputs = {
+//   tenneeds: '[1, 3, 5]',
+//   impairmentyesno: 0,
+//   wellbeing: 3,
+//   badMatch: 'nothing',
+// };
 
 export default class Solver {
-  constructor(excel = new Excel(), inputs = {}) {
-    this.model = excel;
-    this.publishFunctions();
-    if (inputs.length > 0) {
-      return this.solve(excel, inputs);
-    }
+  constructor(excel = new Excel()) {
+    this.d = {};
+    this.processExcel(excel);
   }
 
-  inputs() {
-    return this.model.inputs.map(cell => ({
-      name: cell.comment.name, // value: cell.comment.default,
-      type: cell.type,
-      dataType: cell.comment.dataType,
-      rows: cell.comment.rows,
-      cols: cell.comment.cols,
-      sheet: cell.sheet,
-      ref: cell.ref,
-    }));
-  }
-
-  outputs() {
-    return this.model.outputs.map(cell => ({
-      name: cell.comment.name, // value: cell.comment.default,
-      type: cell.type,
-      dataType: cell.comment.dataType,
-      rows: cell.comment.rows,
-      cols: cell.comment.cols,
-      sheet: cell.sheet,
-      ref: cell.ref,
-    }));
-  }
-
-  publishFunctions() {
-    for (const key in functions) {
-      window[key] = functions[key];
-    }
-  }
-
-  solve(inputs = testInputs) {
-    this.mapInputsToData(inputs);
-    this.runFormulaeInSequence();
-    return []; // outputs
-  }
-
-  mapInputsToData(inputs) {
-    for (const i of inputs) {
-      const inputRef = this.getInputRefByName(i.name);
-      if (inputRef) {
-        // let cell = this.model.setCellValueByRef(inputRef.sheet, inputRef.ref, i.value);
-      }
-    }
+  processExcel(model) {
+    // For each formula in the model, get the set of input range cell
+    // values and rewrite the formula with those static values
+    // Add every static value into the data object
+    // If the formula cell is an output, assign the result to a named var
+    model.formulae.forEach(f => {
+      model.precedents(f.cell).forEach(cell => {
+        this.d[`${cell.sheet}!${cell.ref}`] = cell.value;
+      });
+    });
+    console.log(this.d);
   }
 
   getInputRefByName(name) {
     return this.inputs().filter(i => i.name === name)[0];
-  }
-
-  runFormulaeInSequence() {
-    // for (let f of this.model.formulaeByDepth()) {
-    //     let p = this.model.precedents(f.cell);
-    //     console.log(p);
-    //     console.log(f.expression, p.map(c => this.model.getCellValue(c)));
-    // }
-    // this.model.setCellValueByRef('Version', 'A22', 'Mark');
-    // console.log(this.model.getCellValueByRef('Version', 'A22'));
   }
 }

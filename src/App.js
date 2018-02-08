@@ -27,8 +27,9 @@ class App extends Component {
   loadFile = file => {
     const excel = new Excel(file);
     this.setInfo(excel);
-    const solver = new Solver(excel); // inputs
-    solver.solve(); // WIP
+    console.log(excel);
+    const solver = new Solver(excel);
+    // solver.solve(); // WIP
   };
 
   handleFile = file => {

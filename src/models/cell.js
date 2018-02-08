@@ -1,59 +1,67 @@
 import Comment from './comment';
 
 export default class Cell {
+  constructor(sheet = '', ref = '', cellData = {}) {
+    this.type = cellData.t ? cellData.t : '';
+    this.value = 0;
+    this.initialiseValueByType(this.type, cellData.v);
+    this.formula = cellData.f ? cellData.f : null;
+    this.sheet = sheet;
+    this.ref = ref;
+    this.input = null;
+    this.output = null;
+    this.name = null;
+    this.depth = 0;
+    this.comment = null;
+    this.getCommentData(cellData.c);
+    this.setIO();
+  }
 
-    constructor(sheet = '', ref = '', cellData = {}) {
-        this.type = (cellData.t) ? cellData.t : '';
-        this.value = this.initialiseValueByType(this.type, cellData.v);
-        this.formula = (cellData.f) ? cellData.f : '';
-        this.sheet = sheet;
-        this.ref = ref;
-        this.input = null;
-        this.output = null;
-        this.depth = 0;
-        this.comment = (cellData.c) ? this.getCommentData(cellData.c) : null;
+  initialiseValueByType(type, value) {
+    if (value && value !== '') {
+      this.value = value;
+      return;
     }
+    this.value = type === 'n' ? 0 : '';
+  }
 
-    initialiseValueByType(type, value) {
-        if (value && value !== '') { return value; }
-        return (type === 'n') ? 0 : '';
+  getCommentData(commentText) {
+    if (commentText) {
+      const comment = new Comment(commentText[0].t.toString());
+      comment.getData();
+      this.comment = comment.isValid() ? comment : null;
+      if (this.comment) {
+        this.name = comment.name;
+      }
     }
+  }
 
-    getCommentData(commentText) {
-        let comment = new Comment(commentText[0].t.toString());
-        comment.getData();
-        return comment.isValid() ? comment : null;
-    }
+  isFormula() {
+    return this.formula !== null;
+  }
 
-    isFormula() {
-        return (this.formula.length > 0);
-    }
+  setIO() {
+    this.input = this.comment && this.comment.type === 'I';
+    this.output = this.comment && this.comment.type === 'O';
+  }
 
-    isInput() {
-        return (this.comment && this.comment.type === 'I');
-    }
+  setValue(val) {
+    this.value = val;
+  }
 
-    isOutput() {
-        return (this.comment && this.comment.type === 'O');
-    }
+  setInput(flag) {
+    this.input = flag;
+  }
 
-    setValue(val) {
-        this.value = val;
-    }
+  setOuput(flag) {
+    this.output = flag;
+  }
 
-    setInput(flag) {
-        this.input = flag;
-    }
+  setDepth(depth) {
+    this.depth = depth;
+  }
 
-    setOuput(flag) {
-        this.output = flag;
-    }
-
-    setDepth(depth) {
-        this.depth = depth;
-    }
-
-    setComment(comment) {
-        this.comment = comment;
-    }
+  setComment(comment) {
+    this.comment = comment;
+  }
 }

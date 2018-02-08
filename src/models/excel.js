@@ -3,6 +3,14 @@ import parser from '../services/parser';
 import { flatten } from '../services/utils';
 import Cell from './cell';
 
+const splitOutSheetName = (sheet, range) => {
+  const r = range.split('!');
+  if (r.length === 2) {
+    return { sheet: r[0], range: r[1] };
+  }
+  return { sheet, range };
+};
+
 export default class Excel {
   constructor(file) {
     this.data = [];
@@ -17,10 +25,10 @@ export default class Excel {
     if (file) {
       try {
         this.load(file);
-        this.inputs = this.getInputs();
-        this.outputs = this.getOutputs();
+        this.getInputs();
+        this.getOutputs();
         this.calculateDepths();
-        this.formulae = this.getFormulaeByDepth();
+        this.getFormulaeByDepth();
       } catch (e) {
         console.log('Error loading Excel file:', e.message);
       }
@@ -28,20 +36,19 @@ export default class Excel {
   }
 
   getInputs() {
-    return this.data.filter(c => c.isInput());
+    this.inputs = this.data.filter(c => c.input);
   }
 
   getOutputs() {
-    return this.data.filter(c => c.isOutput());
+    this.outputs = this.data.filter(c => c.output);
   }
 
   getFormulaeByDepth() {
-    return this.cellsWithDepth()
+    this.formulae = this.cellsWithDepth()
       .sort((a, b) => {
         if (a.depth > b.depth) {
           return 1;
         }
-
         return b.depth > a.depth ? -1 : 0;
       })
       .map(cell => ({ cell, expression: cell.formula }));
@@ -58,16 +65,16 @@ export default class Excel {
 
   // Load data with non-empty cells
   load(file) {
-    const workbook = XLSX.read(file, { type: 'binary' }); // TODO: Error check
+    const workbook = XLSX.read(file, { type: 'binary' });
+    // TODO: Error check
     const sheetNames = workbook.SheetNames;
-
-    for (const name of sheetNames) {
+    sheetNames.forEach(name => {
       const worksheet = workbook.Sheets[name];
-      for (const cell in worksheet) {
-        if (cell[0] === '!') continue;
-        this.data.push(new Cell(name, cell, worksheet[cell]));
-      }
-    }
+      const d = Object.entries(worksheet)
+        .filter(([k, v]) => k[0] !== '!')
+        .map(([id, cell]) => new Cell(name, id, cell));
+      this.data = [...this.data, ...d];
+    });
   }
 
   calculateDepths() {
@@ -81,11 +88,8 @@ export default class Excel {
     if (cell.depth > 0) {
       return cell.depth;
     }
-    let depth = 0,
-      children = [];
-    for (const c of this.precedents(cell)) {
-      children.push(this.getDepth(c));
-    }
+    let depth = 0;
+    const children = this.precedents(cell).map(c => this.getDepth(c));
     depth = 1 + Math.max.apply(null, children);
     cell.setDepth(depth);
     return depth;
@@ -97,7 +101,7 @@ export default class Excel {
   }
 
   explodeRange(sheet, range) {
-    const cleanRef = this.splitOutSheetName(sheet, range);
+    const cleanRef = splitOutSheetName(sheet, range);
     const cellArray = XLSX.utils.decode_range(cleanRef.range);
     const decoded = this.decodeCellsFromArray(cleanRef.sheet, cellArray);
     if (decoded.length === 0) {
@@ -106,6 +110,7 @@ export default class Excel {
     return decoded;
   }
 
+  // Refactor in Fp style
   decodeCellsFromArray(sheet, cellArray) {
     const cells = [];
     for (let row = cellArray.s.r; row <= cellArray.e.r; ++row) {
@@ -115,14 +120,6 @@ export default class Excel {
       }
     }
     return cells;
-  }
-
-  splitOutSheetName(sheet, range) {
-    const r = range.split('!');
-    if (r.length === 2) {
-      return { sheet: r[0], range: r[1] };
-    }
-    return { sheet, range };
   }
 
   getCellByRef(sheet, ref) {
@@ -144,10 +141,6 @@ export default class Excel {
 
   setCellValueByRef(sheet, ref, value) {
     const cell = this.getCellByRef(sheet, ref);
-    this.setCellValue(cell, value);
-  }
-
-  setCellValue(cell, value) {
     if (cell) {
       cell.value = value;
     }
