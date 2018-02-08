@@ -21,7 +21,7 @@ const sumArray = [
 describe('Formula module', () => {
   test('correctly calculates using specified inputs', () => {
     expect(run('=(220-age)', inputs)).toBe(172);
-    expect(dp(run('=(weight/(height*height))', inputs))).toBe('24.36');
+    expect(dp(run('=(weight/(height*height))', inputs))).toBe(24.37);
   });
 
   test('cannot calculate using inferred inputs', () => {
@@ -33,5 +33,10 @@ describe('Formula module', () => {
 
   test('correctly calculates using array inputs', () => {
     expect(run('=SUM(sumArray)', { sumArray })).toBe(21);
+  });
+
+  test('calculates a run sequence of formulae', () => {
+    const heartRate = run('=(220-age)', inputs);
+    const bmi = run('=(weight/(height*height))', inputs);
   });
 });

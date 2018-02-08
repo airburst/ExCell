@@ -16,23 +16,15 @@ export const castNumber = num => {
     return cast;
 }
 
-export const dp = (num, places = 2) => {
-    const n = castNumber(num);
-    const nn = Math.floor(n * Math.pow(10, places)) / Math.pow(10, places);
-    return nn.toFixed(places);
-}
-
-export const roundUpToPenny = (amount) => {
+// n decimal places with average rounding
+export const dp = (amount, places = 2) => {
     if (!amount) { return 0; }
-    return Math.ceil((castNumber(amount) - 0.0000001) * 100) / 100;
-}
-
-export const roundDownToPenny = (amount) => {
-    if (!amount) { return 0; }
-    return Math.floor(castNumber(amount) * 100) / 100;
-}
-
-export const roundUpToPound = (amount) => {
-    if (!amount) { return 0; }
-    return parseInt(Math.ceil(castNumber(amount)), 10);
+    try {
+        const exp = Math.pow(10, places);
+        const truncated = Math.round(castNumber(amount) * exp) / exp;
+        return parseFloat(truncated, 10);
+    } catch (e) {
+        console.log(`Rounding error: ${e.message}`);
+        return amount;
+    }
 }
