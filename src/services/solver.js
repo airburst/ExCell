@@ -2,13 +2,6 @@
 // import parser from './parser';
 import Excel from '../models/excel';
 
-// const testInputs = {
-//   tenneeds: '[1, 3, 5]',
-//   impairmentyesno: 0,
-//   wellbeing: 3,
-//   badMatch: 'nothing',
-// };
-
 export default class Solver {
   constructor(excel = new Excel()) {
     this.d = {};
