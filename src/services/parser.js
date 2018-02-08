@@ -1,6 +1,6 @@
 import formula from 'excel-formula';
 
-export default class Parser {
+class Parser {
 
     constructor() {
         this.getTokens = formula.getTokens;
@@ -12,3 +12,5 @@ export default class Parser {
             .map((r) => { return r.value; });
     }
 }
+
+export default new Parser();
