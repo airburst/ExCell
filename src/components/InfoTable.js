@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { Table } from 'semantic-ui-react';
 
 const InfoTableRow = props => {
-  const listContent = content => content.map((c, key) => (
-    <div key={key}>{c}</div>
-  ));
+  const listContent = content => content.map(c => <div>{c}</div>);
 
   return (
     <Table.Body>
@@ -13,11 +11,11 @@ const InfoTableRow = props => {
         <Table.Cell>{listContent(props.content)}</Table.Cell>
       </Table.Row>
     </Table.Body>
-  )
+  );
 };
 
 InfoTableRow.propTypes = {
-  content: PropTypes.array,
+  content: PropTypes.array.isRequired,
 };
 
 const InfoTable = props => {
@@ -30,8 +28,7 @@ const InfoTable = props => {
           <Table.Row>
             <Table.HeaderCell>
               {title}
-              {content.length > 0 &&
-                <div className="info-table-count">{content.length}</div>}
+              {content.length > 0 && <div className="info-table-count">{content.length}</div>}
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -43,8 +40,8 @@ const InfoTable = props => {
 };
 
 InfoTable.propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.array,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.array.isRequired,
 };
 
 export default InfoTable;
