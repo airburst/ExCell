@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Excel from './models/excel';
 import { arrayToString } from './services/utils';
-import Solver from './services/solver';
+import solver from './services/solver'; // name!
 import Dropzone from './components/Dropzone';
 import InfoTable from './components/InfoTable';
 import './App.css';
@@ -28,8 +28,13 @@ class App extends Component {
     const excel = new Excel(file);
     this.setInfo(excel);
     console.log(excel);
-    const solver = new Solver(excel);
-    console.log(solver.d);
+    const calculate = solver(excel);
+    const outputs = calculate({
+      age: 48,
+      weight: 83,
+      height: 1.85,
+    });
+    console.log(outputs);
   };
 
   handleFile = file => {

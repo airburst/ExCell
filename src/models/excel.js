@@ -3,7 +3,7 @@ import parser from '../services/parser';
 import { flatten } from '../services/utils';
 import Cell from './cell';
 
-const splitOutSheetName = (sheet, range) => {
+export const splitOutSheetName = (sheet, range) => {
   const r = range.split('!');
   if (r.length === 2) {
     return { sheet: r[0], range: r[1] };
@@ -85,7 +85,6 @@ export default class Excel {
     return decoded;
   }
 
-  // Refactor in Fp style
   decodeCellsFromArray(sheet, cellArray) {
     const cells = [];
     for (let row = cellArray.s.r; row <= cellArray.e.r; ++row) {
