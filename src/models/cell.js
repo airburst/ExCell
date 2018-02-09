@@ -3,7 +3,7 @@ import Comment from './comment';
 export default class Cell {
   constructor(sheet = '', ref = '', cellData = {}) {
     this.type = cellData.t ? cellData.t : '';
-    this.value = 0;
+    this.value = null;
     this.initialiseValueByType(this.type, cellData.v);
     this.formula = cellData.f ? cellData.f : null;
     this.sheet = sheet;
@@ -22,7 +22,7 @@ export default class Cell {
       this.value = value;
       return;
     }
-    this.value = type === 'n' ? 0 : '';
+    this.value = type === 'n' ? 0 : null;
   }
 
   getCommentData(commentText) {

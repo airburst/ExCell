@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Table } from 'semantic-ui-react';
 
 const InfoTableRow = props => {
-  const listContent = content => content.map(c => <div>{c}</div>);
+  // eslint-disable-next-line react/no-array-index-key
+  const listContent = content => content.map((c, k) => <div key={k}>{c}</div>);
 
   return (
     <Table.Body>
