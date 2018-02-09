@@ -25,8 +25,7 @@ export default class Excel {
     if (file) {
       try {
         this.load(file);
-        this.getInputs();
-        this.getOutputs();
+        this.getIO();
         this.calculateDepths();
         this.getFormulaeByDepth();
       } catch (e) {
@@ -35,11 +34,8 @@ export default class Excel {
     }
   }
 
-  getInputs() {
+  getIO() {
     this.inputs = this.data.filter(c => c.input);
-  }
-
-  getOutputs() {
     this.outputs = this.data.filter(c => c.output);
   }
 

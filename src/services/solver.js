@@ -15,7 +15,12 @@ export default class Solver {
     // If the formula cell is an output, assign the result to a named var
     model.formulae.forEach(f => {
       model.precedents(f.cell).forEach(cell => {
-        this.d[`${cell.sheet}!${cell.ref}`] = cell.value;
+        if (!cell) {
+          // TODO: handle null cells like Excel does
+          console.log('Error finding precendent for', f.cell);
+        } else {
+          this.d[`${cell.sheet}!${cell.ref}`] = cell.value;
+        }
       });
     });
   }
