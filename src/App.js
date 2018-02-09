@@ -33,6 +33,9 @@ class App extends Component {
       age: 48,
       weight: 83,
       height: 1.85,
+      impairmentyesno: 0,
+      wellbeing: 0,
+      tenneeds: '[1,3,5]',
     });
     console.log(outputs);
   };

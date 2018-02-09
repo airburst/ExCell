@@ -6,15 +6,12 @@ const processExcel = (model, inputs) => {
   const results = {};
   model.formulae.forEach(f => {
     const { sheet, ref, name, output } = f.cell;
-    const ranges = parser.getRangeTokens(f.expression);
     const expressionInputs = {};
+    const ranges = parser.getRangeTokens(f.expression);
     ranges.forEach(range => {
-      const replaced = model.explodeRange(sheet, range).map(cell => {
-        if (cell.input) {
-          return inputs[cell.name];
-        }
-        return cell.value;
-      });
+      const replaced = model
+        .explodeRange(sheet, range)
+        .map(cell => (cell.input ? inputs[cell.name] : cell.value));
       expressionInputs[range] = replaced.length > 1 ? replaced : replaced[0];
     });
     console.log(f.expression, expressionInputs);
