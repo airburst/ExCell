@@ -101,10 +101,6 @@ export default class Excel {
     return cells;
   }
 
-  getCellByRef(sheet, ref) {
-    return this.data.filter(d => d.sheet === sheet && d.ref === ref)[0];
-  }
-
   getFormulaeByDepth() {
     this.formulae = this.cellsWithDepth()
       .sort((a, b) => {
@@ -123,6 +119,10 @@ export default class Excel {
   addError(type = '', message = '', cell = undefined) {
     this.errors.push({ type, message, cell });
     console.error(`${type}: ${message}.  Cell ref: ${cell}`);
+  }
+
+  getCellByRef(sheet, ref) {
+    return this.data.filter(d => d.sheet === sheet && d.ref === ref)[0];
   }
 
   getCellIndexByRef(sheet, ref) {

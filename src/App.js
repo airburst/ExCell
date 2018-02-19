@@ -36,6 +36,7 @@ class App extends Component {
       impairmentyesno: 0,
       wellbeing: 0,
       tenneeds: '[1,3,5]',
+      numberOfSides: 5,
     });
     console.log(outputs);
   };
