@@ -72,7 +72,7 @@ export default class Excel {
 
   precedents(cell) {
     const ranges = parser.getRangeTokens(cell.formula);
-    return flatten(ranges.map(r => this.explodeRange(cell.sheet, r)));
+    return flatten(ranges.map(r => flatten(this.explodeRange(cell.sheet, r))));
   }
 
   explodeRange(cellSheet, cellRange) {
@@ -85,17 +85,29 @@ export default class Excel {
     return decoded;
   }
 
-  decodeCellsFromArray(sheet, cellArray) {
+  decodeCellsFromArray(sheet, range) {
     const cells = [];
-    for (let row = cellArray.s.r; row <= cellArray.e.r; ++row) {
-      for (let col = cellArray.s.c; col <= cellArray.e.c; ++col) {
+    const table = range.e.r - range.s.r > 0 && range.e.c - range.s.c > 0;
+
+    for (let row = range.s.r; row <= range.e.r; ++row) {
+      const rowData = [];
+      for (let col = range.s.c; col <= range.e.c; ++col) {
         const ref = XLSX.utils.encode_cell({ c: col, r: row });
         const cell = this.getCellByRef(sheet, ref);
         if (!cell) {
-          cells.push(new Cell(sheet, ref));
+          if (table) {
+            rowData.push(new Cell(sheet, ref));
+          } else {
+            cells.push(new Cell(sheet, ref));
+          }
+        } else if (table) {
+          rowData.push(cell);
         } else {
           cells.push(cell);
         }
+      }
+      if (table) {
+        cells.push(rowData);
       }
     }
     return cells;

@@ -34,7 +34,7 @@ class App extends Component {
       weight: 83,
       height: 1.85,
       impairmentyesno: 0,
-      wellbeing: 0,
+      wellbeing: 1,
       tenneeds: '[1,3,5]',
       numberOfSides: 5,
     });
