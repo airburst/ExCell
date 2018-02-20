@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Excel from './models/excel';
-import { arrayToString } from './services/utils';
 import solver from './services/solver'; // name!
 import Dropzone from './components/Dropzone';
 import Inputs from './components/Inputs';
@@ -19,37 +18,27 @@ class App extends Component {
   setInfo = excel => {
     this.setState({
       calculate: solver(excel),
-      inputs: arrayToString(excel.inputs.map(i => i.comment.name)),
-      outputs: arrayToString(excel.outputs.map(i => i.comment.name)),
+      inputs: excel.inputs.map(i => ({
+        [i.comment.name]: i.value,
+      })),
+      outputs: excel.outputs.map(o => ({
+        [o.comment.name]: o.value,
+      })),
     });
   };
 
   loadFile = file => {
     const excel = new Excel(file);
     this.setInfo(excel);
-    // console.log(excel);
-    // const calculate = solver(excel);
-    // const outputs = calculate({
-    //   age: 48,
-    //   weight: 83,
-    //   height: 1.85,
-    //   impairmentyesno: 0,
-    //   wellbeing: 1,
-    //   tenneeds: '[1,3,5]',
-    //   numberOfSides: 5,
-    //   propertyValue: 500000,
-    //   loan: 170000,
-    //   rate: 0.0299,
-    //   years: 9,
-    // });
-    // console.log(outputs);
+    console.log(excel);
   };
 
   doCalculation = inputs => {
-    // Cast string input values into correct data types
-    const outputs = this.state.calculate(inputs);
-    console.log(outputs);
-    this.setState({ outputs: [] });
+    const results = this.state.calculate(inputs);
+    const outputs = Object.entries(results).map(([name, value]) => ({
+      [name]: value,
+    }));
+    this.setState({ outputs });
   };
 
   handleFile = file => {

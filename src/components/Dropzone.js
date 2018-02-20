@@ -28,8 +28,8 @@ const UploadDropzone = props => {
       accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       onDrop={onDrop}
     >
-      <Icon name="cloud upload" size="huge" />
-      <p>Drop Excel file to upload</p>
+      <Icon name="file excel outline" size="huge" />
+      <p className="drop-text">Drop Excel file to upload</p>
       <Button
         color="blue"
         onClick={buttonHandler}

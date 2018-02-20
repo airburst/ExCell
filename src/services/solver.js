@@ -28,13 +28,13 @@ const processExcel = (model, inputs) => {
       });
       // Update the data model with the new computed value for the formula cell
       model.setCellValueByRef(sheet, ref, run(expr, expressionInputs));
-      // console.log(
-      //   'COMPUTED',
-      //   `${sheet}!${ref}`,
-      //   `=${expr}`,
-      //   expressionInputs,
-      //   `=> ${model.getCellValueByRef(sheet, ref)}`
-      // );
+      console.log(
+        'COMPUTED',
+        `${sheet}!${ref}`,
+        `=${expr}`,
+        expressionInputs,
+        `=> ${model.getCellValueByRef(sheet, ref)}`
+      );
       if (output) {
         results[name] = model.getCellValueByRef(sheet, ref);
       }

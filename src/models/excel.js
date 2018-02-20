@@ -17,6 +17,7 @@ export default class Excel {
     this.inputs = [];
     this.outputs = [];
     this.formulae = [];
+    this.namedRanges = new Map();
     this.errors = [];
     this.loadFile(file);
   }
@@ -37,6 +38,7 @@ export default class Excel {
   load(file) {
     // TODO: Error check
     const workbook = XLSX.read(file, { type: 'binary' });
+    this.setNamedRanges(workbook);
     const sheetNames = workbook.SheetNames;
     sheetNames.forEach(name => {
       const worksheet = workbook.Sheets[name];
@@ -45,6 +47,13 @@ export default class Excel {
         .map(([id, cell]) => new Cell(name, id, cell));
       this.data = [...this.data, ...d];
     });
+  }
+
+  setNamedRanges(wb) {
+    const names = wb.Workbook.Names;
+    if (names && names.length > 0) {
+      names.forEach(range => this.namedRanges.set(range.Name, range.Ref));
+    }
   }
 
   getIO() {

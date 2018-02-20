@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button } from 'semantic-ui-react';
-import uuid from 'uuid/v4';
+import { Form } from 'semantic-ui-react';
 import { castNumber } from '../services/utils';
 
 const InputItem = props => {
@@ -31,8 +30,10 @@ class Inputs extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.inputs !== this.props.inputs) {
       const inputs = {};
-      nextProps.inputs.forEach(i => {
-        inputs[i] = '';
+      nextProps.inputs.forEach(input => {
+        Object.entries(input).forEach(([name, value]) => {
+          inputs[name] = value.toString();
+        });
       });
       this.setState(inputs);
     }
@@ -42,9 +43,12 @@ class Inputs extends React.Component {
     const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const { name } = target;
-    this.setState({
-      [name]: value,
-    });
+    this.setState(
+      {
+        [name]: value,
+      },
+      this.handleCalculate
+    );
   };
 
   handleCalculate = () => {
@@ -62,7 +66,7 @@ class Inputs extends React.Component {
       this.state &&
       Object.entries(this.state).map(([name, value]) => (
         <InputItem
-          key={uuid()}
+          key={name}
           name={name}
           value={value}
           onChange={this.handleInputChange}
@@ -73,9 +77,9 @@ class Inputs extends React.Component {
       <div className="inputs">
         <Form>
           {InputItems}
-          <Button color="blue" onClick={this.handleCalculate}>
+          {/* <Button color="blue" onClick={this.handleCalculate}>
             Calculate
-          </Button>
+          </Button> */}
         </Form>
       </div>
     );
