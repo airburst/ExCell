@@ -30,7 +30,7 @@ class App extends Component {
   loadFile = file => {
     const excel = new Excel(file);
     this.setInfo(excel);
-    console.log(excel);
+    // console.log(excel);
   };
 
   doCalculation = inputs => {

@@ -3,8 +3,9 @@ import parser from '../services/parser';
 import { flatten } from '../services/utils';
 import Cell from './cell';
 
-export const splitOutSheetName = (sheet, range) => {
-  const r = range.split('!');
+export const splitOutSheetName = (sheet, range, namedRanges) => {
+  const realRange = namedRanges.get(range) ? namedRanges.get(range) : range;
+  const r = realRange.split('!');
   if (r.length === 2) {
     return { sheet: r[0], range: r[1] };
   }
@@ -85,7 +86,11 @@ export default class Excel {
   }
 
   explodeRange(cellSheet, cellRange) {
-    const { sheet, range } = splitOutSheetName(cellSheet, cellRange);
+    const { sheet, range } = splitOutSheetName(
+      cellSheet,
+      cellRange,
+      this.namedRanges
+    );
     const cellArray = XLSX.utils.decode_range(range);
     const decoded = this.decodeCellsFromArray(sheet, cellArray);
     if (decoded.length === 0) {
@@ -154,12 +159,12 @@ export default class Excel {
     return this.data.indexOf(cell);
   }
 
-  getCellValueByRef(sheet, ref) {
+  getCellValue(sheet, ref) {
     const cell = this.getCellByRef(sheet, ref);
     return cell ? cell.value : null;
   }
 
-  setCellValueByRef(sheet, ref, value) {
+  setCellValue(sheet, ref, value) {
     const cell = this.getCellByRef(sheet, ref);
     if (cell) {
       cell.value = value;

@@ -27,16 +27,16 @@ const processExcel = (model, inputs) => {
           replaced.length > 1 ? replaced : replaced[0];
       });
       // Update the data model with the new computed value for the formula cell
-      model.setCellValueByRef(sheet, ref, run(expr, expressionInputs));
-      console.log(
-        'COMPUTED',
-        `${sheet}!${ref}`,
-        `=${expr}`,
-        expressionInputs,
-        `=> ${model.getCellValueByRef(sheet, ref)}`
-      );
+      model.setCellValue(sheet, ref, run(expr, expressionInputs));
+      // console.log(
+      //   'COMPUTED',
+      //   `${sheet}!${ref}`,
+      //   `=${expr}`,
+      //   expressionInputs,
+      //   `=> ${model.getCellValue(sheet, ref)}`
+      // );
       if (output) {
-        results[name] = model.getCellValueByRef(sheet, ref);
+        results[name] = model.getCellValue(sheet, ref);
       }
     });
   } catch (e) {
