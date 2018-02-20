@@ -29,7 +29,9 @@ const InfoTable = props => {
           <Table.Row>
             <Table.HeaderCell>
               {title}
-              {content.length > 0 && <div className="info-table-count">{content.length}</div>}
+              {content.length > 0 && (
+                <div className="info-table-count">{content.length}</div>
+              )}
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>

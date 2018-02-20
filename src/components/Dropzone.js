@@ -30,7 +30,11 @@ const UploadDropzone = props => {
     >
       <Icon name="cloud upload" size="huge" />
       <p>Drop Excel file to upload</p>
-      <Button color="blue" onClick={buttonHandler} content="Or Click to Select File" />
+      <Button
+        color="blue"
+        onClick={buttonHandler}
+        content="Or Click to Select File"
+      />
     </Dropzone>
   );
 };
