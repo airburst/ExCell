@@ -26,7 +26,6 @@ const processExcel = (model, inputs) => {
         expressionInputs[rangeVar] =
           replaced.length > 1 ? replaced : replaced[0];
       });
-      // Update the data model with the new computed value for the formula cell
       model.setCellValue(sheet, ref, run(expr, expressionInputs));
       // console.log(
       //   'COMPUTED',

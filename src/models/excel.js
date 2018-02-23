@@ -21,6 +21,7 @@ export default class Excel {
     this.namedRanges = new Map();
     this.errors = [];
     this.loadFile(file);
+    // console.log(this.formulae);
   }
 
   loadFile(file) {
@@ -129,13 +130,14 @@ export default class Excel {
 
   getFormulaeByDepth() {
     this.formulae = this.cellsWithDepth()
-      .sort((a, b) => {
-        if (a.depth > b.depth) {
-          return 1;
-        }
-        return b.depth > a.depth ? -1 : 0;
-      })
-      .map(cell => ({ cell, expression: cell.formula }));
+      // .sort((a, b) => {
+      //   if (a.depth > b.depth) {
+      //     return 1;
+      //   }
+      //   return b.depth > a.depth ? -1 : 0;
+      // })
+      .sort((a, b) => a.depth - b.depth || a.formula - b.formula)
+      .map(cell => ({ cell, expression: cell.formula, d: cell.depth }));
   }
 
   cellsWithDepth() {
