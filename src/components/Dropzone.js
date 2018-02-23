@@ -8,7 +8,6 @@ const UploadDropzone = props => {
   let dropzoneRef;
 
   const onDrop = accepted => {
-    console.log(accepted);
     if (accepted.length > 0) {
       props.handleFile(accepted[0]);
     }
