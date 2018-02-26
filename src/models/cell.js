@@ -1,4 +1,4 @@
-import Comment from './comment';
+import getCommentData from './comment';
 
 export default class Cell {
   constructor(sheet = '', ref = '', cellData = {}) {
@@ -12,9 +12,7 @@ export default class Cell {
     this.output = null;
     this.name = null;
     this.depth = 0;
-    this.comment = null;
-    this.getCommentData(cellData.c);
-    this.setIO();
+    this.processComment(cellData.c);
   }
 
   initialiseValueByType(type, value) {
@@ -25,24 +23,17 @@ export default class Cell {
     this.value = type === 's' ? '' : 0;
   }
 
-  getCommentData(commentText) {
+  processComment(commentText) {
     if (commentText) {
-      const comment = new Comment(commentText[0].t.toString());
-      comment.getData();
-      this.comment = comment.isValid() ? comment : null;
-      if (this.comment) {
-        this.name = comment.name;
-      }
+      const { name, I, O } = getCommentData(commentText[0].t.toString());
+      this.name = name;
+      this.input = I !== undefined;
+      this.output = O !== undefined;
     }
   }
 
   isFormula() {
     return this.formula !== null;
-  }
-
-  setIO() {
-    this.input = this.comment && this.comment.type === 'I';
-    this.output = this.comment && this.comment.type === 'O';
   }
 
   setValue(val) {

@@ -19,10 +19,10 @@ class App extends Component {
     this.setState({
       calculate: solver(excel),
       inputs: excel.inputs.map(i => ({
-        [i.comment.name]: i.value,
+        [i.name]: i.value,
       })),
       outputs: excel.outputs.map(o => ({
-        [o.comment.name]: o.value,
+        [o.name]: o.value,
       })),
     });
   };

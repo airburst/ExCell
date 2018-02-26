@@ -21,7 +21,6 @@ export default class Excel {
     this.namedRanges = new Map();
     this.errors = [];
     this.loadFile(file);
-    // console.log(this.formulae);
   }
 
   loadFile(file) {
@@ -30,15 +29,14 @@ export default class Excel {
         this.load(file);
         this.getIO();
         this.calculateDepths();
-        this.getFormulaeByDepth();
+        this.sortFormulaeByDepth();
       } catch (e) {
-        console.log('Error loading Excel file:', e.message);
+        this.errors.push(new Error('Error loading Excel file'));
       }
     }
   }
 
   load(file) {
-    // TODO: Error check
     const workbook = XLSX.read(file, { type: 'binary' });
     this.setNamedRanges(workbook);
     const sheetNames = workbook.SheetNames;
@@ -128,14 +126,8 @@ export default class Excel {
     return cells;
   }
 
-  getFormulaeByDepth() {
+  sortFormulaeByDepth() {
     this.formulae = this.cellsWithDepth()
-      // .sort((a, b) => {
-      //   if (a.depth > b.depth) {
-      //     return 1;
-      //   }
-      //   return b.depth > a.depth ? -1 : 0;
-      // })
       .sort((a, b) => a.depth - b.depth || a.formula - b.formula)
       .map(cell => ({ cell, expression: cell.formula, d: cell.depth }));
   }
