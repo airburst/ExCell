@@ -1,6 +1,6 @@
 import XLSX from 'xlsx';
-import parser from '../services/parser';
-import { flatten } from '../services/utils';
+import parser from './parser';
+import { flatten } from './utils';
 import Cell from './Cell';
 
 export const splitOutSheetName = (sheet, range, namedRanges) => {
