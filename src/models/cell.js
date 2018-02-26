@@ -25,6 +25,7 @@ export default class Cell {
 
   processComment(commentText) {
     if (commentText) {
+      // Allocate any future comment keys here
       const { name, I, O } = getCommentData(commentText[0].t.toString());
       this.name = name;
       this.input = I !== undefined;
