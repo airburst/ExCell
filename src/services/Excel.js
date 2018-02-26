@@ -20,6 +20,9 @@ export default class Excel {
     this.formulae = [];
     this.namedRanges = new Map();
     this.errors = [];
+
+    this.d = {};
+
     this.loadFile(file);
   }
 
@@ -66,12 +69,21 @@ export default class Excel {
   }
 
   getDepth(cell) {
-    if (!cell || !cell.isFormula()) {
+    if (!cell) {
       return 0;
     }
+    // Assign value to data store
+    const { sheet, ref } = cell;
+    this.d[`${sheet}!${ref}`] = cell.value;
+    // Only formulae have depth
+    if (!cell.isFormula()) {
+      return 0;
+    }
+    // Already memoised?  f[cell] TBD
     if (cell.depth > 0) {
       return cell.depth;
     }
+    // Assign to formulae list and compute depth - TBD
     let depth = 0;
     const children = this.precedents(cell).map(c => this.getDepth(c));
     depth = 1 + Math.max.apply(null, children);

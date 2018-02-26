@@ -31,6 +31,7 @@ class App extends Component {
     const excel = new Excel(file);
     this.setInfo(excel);
     console.log(excel);
+    console.log(Object.keys(excel.d).length);
   };
 
   doCalculation = inputs => {
