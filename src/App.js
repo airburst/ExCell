@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Excel from './models/excel';
+import Excel from './services/Excel';
 import solver from './services/solver'; // name!
 import Dropzone from './components/Dropzone';
 import Inputs from './components/Inputs';
@@ -34,11 +34,13 @@ class App extends Component {
   };
 
   doCalculation = inputs => {
+    const start = new Date().getTime();
     const results = this.state.calculate(inputs);
     const outputs = Object.entries(results).map(([name, value]) => ({
       [name]: value,
     }));
     this.setState({ outputs });
+    console.log(`Calculation took ${new Date().getTime() - start} ms`);
   };
 
   handleFile = file => {

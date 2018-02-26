@@ -23,7 +23,9 @@ describe('Formula module', () => {
 
   test('cannot calculate using inferred inputs', () => {
     const a = 50;
-    expect(run('=(220-a)')).toMatchObject(new Error({ name: 'Invalid value', message: '#VALUE!' }));
+    expect(run('=(220-a)')).toMatchObject(
+      new Error({ name: 'Invalid value', message: '#VALUE!' })
+    );
   });
 
   test('correctly calculates using array inputs', () => {

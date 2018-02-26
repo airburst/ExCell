@@ -1,7 +1,7 @@
 import XLSX from 'xlsx';
 import parser from '../services/parser';
 import { flatten } from '../services/utils';
-import Cell from './cell';
+import Cell from './Cell';
 
 export const splitOutSheetName = (sheet, range, namedRanges) => {
   const realRange = namedRanges.get(range) ? namedRanges.get(range) : range;

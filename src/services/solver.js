@@ -1,6 +1,6 @@
 import { run } from 'formula';
 import parser from './parser';
-import Excel from '../models/excel';
+import Excel from './Excel';
 
 const expandRange = (model, sheet, range, inputs) =>
   model.explodeRange(sheet, range).map(row => {
