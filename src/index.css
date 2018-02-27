@@ -29,7 +29,7 @@ a {
 .info {
   display: flex;
   flex-direction: row;
-  flex-grow: 2;
+  flex: 1;
   align-items: stretch;
   text-align: left;
 }

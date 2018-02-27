@@ -6,6 +6,8 @@
     "formula": "^2.3.3",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-code-prettify": "^0.0.1",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.7",
     "react-scripts": "1.1.0",

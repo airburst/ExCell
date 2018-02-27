@@ -3,6 +3,7 @@ import Excel from './services/Excel';
 import solver from './services/solver';
 import makeCode from './services/makeCode';
 import Dropzone from './components/Dropzone';
+import Code from './components/Code';
 import Inputs from './components/Inputs';
 import Outputs from './components/Outputs';
 
@@ -11,6 +12,7 @@ class App extends Component {
     super();
     this.state = {
       calculate: () => {},
+      code: null,
       inputs: [],
       outputs: [],
     };
@@ -19,6 +21,7 @@ class App extends Component {
   setInfo = excel => {
     this.setState({
       calculate: solver(excel),
+      code: makeCode(excel),
       inputs: excel.inputs.map(i => ({
         [i.name]: i.value,
       })),
@@ -31,7 +34,6 @@ class App extends Component {
   loadFile = file => {
     const excel = new Excel(file);
     this.setInfo(excel);
-    console.log(makeCode(excel));
   };
 
   doCalculation = inputs => {
@@ -58,11 +60,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Dropzone handleFile={this.handleFile} />
-        <div className="info">
-          <Inputs inputs={this.state.inputs} calculate={this.doCalculation} />
-          <Outputs outputs={this.state.outputs} />
-        </div>
+        {!this.state.code && <Dropzone handleFile={this.handleFile} />}
+        {this.state.code && <Code code={this.state.code} />}
+        {this.state.inputs && (
+          <div className="info">
+            <Inputs inputs={this.state.inputs} calculate={this.doCalculation} />
+            <Outputs outputs={this.state.outputs} />
+          </div>
+        )}
       </div>
     );
   }

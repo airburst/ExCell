@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  flex-grow: 1;
+  flex: 1;
   font-size: 2em;
   color: #999;
   background-color: #fbfbfb;
