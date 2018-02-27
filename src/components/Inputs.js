@@ -75,12 +75,7 @@ class Inputs extends React.Component {
 
     return (
       <div className="inputs">
-        <Form>
-          {InputItems}
-          {/* <Button color="blue" onClick={this.handleCalculate}>
-            Calculate
-          </Button> */}
-        </Form>
+        <Form>{InputItems}</Form>
       </div>
     );
   }

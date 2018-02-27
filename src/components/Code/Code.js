@@ -6,22 +6,24 @@ import { Button } from 'semantic-ui-react';
 import './Code.css';
 
 const CodeBlock = props => {
-  const { code } = props;
+  const { code } = props.settings;
 
   return (
     <div className="code-block">
-      <Code codeString={code} language="javascript" />
-      <div className="copy-button">
-        <CopyToClipboard text={code}>
-          <Button color="blue" content="Copy" />
-        </CopyToClipboard>
-      </div>
+      <Code codeString={code || '// No code loaded...'} language="javascript" />
+      {code && (
+        <div className="copy-button">
+          <CopyToClipboard text={code}>
+            <Button color="blue" content="Copy" />
+          </CopyToClipboard>
+        </div>
+      )}
     </div>
   );
 };
 
 CodeBlock.propTypes = {
-  code: PropTypes.string.isRequired,
+  settings: PropTypes.object.isRequired,
 };
 
 export default CodeBlock;

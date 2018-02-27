@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import Excel from './services/Excel';
-import solver from './services/solver';
-import makeCode from './services/makeCode';
-import Dropzone from './components/Dropzone';
-import Code from './components/Code';
-import Inputs from './components/Inputs';
-import Outputs from './components/Outputs';
+import PropTypes from 'prop-types';
+import Excel from '../../services/Excel';
+import solver from '../../services/solver';
+import makeCode from '../../services/makeCode';
+import Dropzone from '../../components/Dropzone';
+import Inputs from '../../components/Inputs';
+import Outputs from '../../components/Outputs';
 
-class App extends Component {
+class Home extends Component {
   constructor() {
     super();
     this.state = {
       calculate: () => {},
-      code: null,
       inputs: [],
       outputs: [],
     };
@@ -21,7 +20,6 @@ class App extends Component {
   setInfo = excel => {
     this.setState({
       calculate: solver(excel),
-      code: makeCode(excel),
       inputs: excel.inputs.map(i => ({
         [i.name]: i.value,
       })),
@@ -32,8 +30,11 @@ class App extends Component {
   };
 
   loadFile = file => {
+    const { history, setCode } = this.props;
     const excel = new Excel(file);
     this.setInfo(excel);
+    setCode(makeCode(excel));
+    history.push('/code');
   };
 
   doCalculation = inputs => {
@@ -58,19 +59,23 @@ class App extends Component {
   };
 
   render() {
+    const inputClass = this.state.inputs.length === 0 ? 'hidden info' : 'info';
     return (
       <div className="App">
-        {!this.state.code && <Dropzone handleFile={this.handleFile} />}
-        {this.state.code && <Code code={this.state.code} />}
-        {this.state.inputs && (
-          <div className="info">
-            <Inputs inputs={this.state.inputs} calculate={this.doCalculation} />
-            <Outputs outputs={this.state.outputs} />
-          </div>
-        )}
+        <Dropzone handleFile={this.handleFile} />
+
+        <div className={inputClass}>
+          <Inputs inputs={this.state.inputs} calculate={this.doCalculation} />
+          <Outputs outputs={this.state.outputs} />
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+Home.propTypes = {
+  setCode: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+};
+
+export default Home;

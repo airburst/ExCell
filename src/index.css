@@ -32,6 +32,10 @@ a {
   flex: 1;
   align-items: stretch;
   text-align: left;
+  margin-top: 40px;
+}
+.info.hidden {
+  display: none;
 }
 
 .inputs {
