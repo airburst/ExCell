@@ -3,6 +3,8 @@ import parser from './parser';
 import { flatten } from './utils';
 import Cell from './Cell';
 
+const makeRef = (sheet, ref) => `${sheet}!${ref}`;
+
 export const splitOutSheetName = (sheet, range, namedRanges) => {
   const realRange = namedRanges.get(range) ? namedRanges.get(range) : range;
   const r = realRange.split('!');
@@ -15,14 +17,11 @@ export const splitOutSheetName = (sheet, range, namedRanges) => {
 export default class Excel {
   constructor(file) {
     this.data = [];
+    this.d = {};
     this.inputs = [];
     this.outputs = [];
-    this.formulae = [];
+    this.formulae = {};
     this.namedRanges = new Map();
-    this.errors = [];
-
-    this.d = {};
-
     this.loadFile(file);
   }
 
@@ -32,9 +31,10 @@ export default class Excel {
         this.load(file);
         this.getIO();
         this.calculateDepths();
+        console.log(this.formulae);
         this.sortFormulaeByDepth();
       } catch (e) {
-        this.errors.push(new Error('Error loading Excel file'));
+        throw new Error(`Error loading Excel file: ${e.message}`);
       }
     }
   }
@@ -68,32 +68,55 @@ export default class Excel {
     this.outputs.map(cell => this.getDepth(cell));
   }
 
+  // Establish the relative 'depth' of a formula, i.e. the number of
+  // prior formulae that must be run before this one. Also build up
+  // collections of overall data and specific forulae input refs.
   getDepth(cell) {
-    if (!cell) {
-      return 0;
-    }
+    const { sheet, ref, formula, value } = cell;
     // Assign value to data store
-    const { sheet, ref } = cell;
-    this.d[`${sheet}!${ref}`] = cell.value;
+    const field = makeRef(sheet, ref);
+    this.d[field] = value;
     // Only formulae have depth
-    if (!cell.isFormula()) {
+    if (!formula) {
       return 0;
     }
-    // Already memoised?  f[cell] TBD
-    if (cell.depth > 0) {
-      return cell.depth;
+    if (this.formulae[field]) {
+      return this.formulae[field].depth;
     }
-    // Assign to formulae list and compute depth - TBD
     let depth = 0;
-    const children = this.precedents(cell).map(c => this.getDepth(c));
-    depth = 1 + Math.max.apply(null, children);
+    const { cells, expression, inputs } = this.precedents({ sheet, formula });
+    cells.map(c => this.getDepth(c));
+    depth = 1 + Math.max.apply(null, cells.map(c => c.depth));
     cell.setDepth(depth);
+    this.formulae[field] = { field, expression, depth, inputs };
     return depth;
   }
 
-  precedents(cell) {
-    const ranges = parser.getRangeTokens(cell.formula);
-    return flatten(ranges.map(r => flatten(this.explodeRange(cell.sheet, r))));
+  precedents({ sheet, formula }) {
+    const ranges = parser.getRangeTokens(formula);
+    let expression = formula;
+    const inputs = {};
+    ranges.forEach((range, key) => {
+      const replaced = this.expandRange(sheet, range);
+      const rangeVar = `r${key}`;
+      expression = expression.replace(range, rangeVar);
+      inputs[rangeVar] = replaced.length > 1 ? replaced : replaced[0];
+    });
+    const cells = flatten(
+      ranges.map(r => flatten(this.explodeRange(sheet, r)))
+    );
+    return { cells, expression, inputs };
+  }
+
+  expandRange(sheet, range) {
+    return this.explodeRange(sheet, range).map(row => {
+      if (!Array.isArray(row)) {
+        return row.input ? row.name : makeRef(row.sheet, row.ref);
+      }
+      return row.map(
+        cell => (cell.input ? cell.name : makeRef(cell.sheet, cell.ref))
+      );
+    });
   }
 
   explodeRange(cellSheet, cellRange) {
@@ -105,7 +128,7 @@ export default class Excel {
     const cellArray = XLSX.utils.decode_range(range);
     const decoded = this.decodeCellsFromArray(sheet, cellArray);
     if (decoded.length === 0) {
-      this.addError('Cannot identify range', range);
+      console.log('Cannot identify range', range);
     }
     return decoded;
   }
@@ -139,18 +162,15 @@ export default class Excel {
   }
 
   sortFormulaeByDepth() {
-    this.formulae = this.cellsWithDepth()
+    this.formulae = Object.entries(this.formulae)
+      .map(([err, value]) => value)
       .sort((a, b) => a.depth - b.depth || a.formula - b.formula)
-      .map(cell => ({ cell, expression: cell.formula, d: cell.depth }));
-  }
-
-  cellsWithDepth() {
-    return this.data.filter(c => c.depth > 0);
-  }
-
-  addError(type = '', message = '', cell = undefined) {
-    this.errors.push({ type, message, cell });
-    console.error(`${type}: ${message}.  Cell ref: ${cell}`);
+      .map(f => ({
+        ref: f.field,
+        expression: f.expression,
+        d: f.depth,
+        inputs: f.inputs,
+      }));
   }
 
   getCellByRef(sheet, ref) {

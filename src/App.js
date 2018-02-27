@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Excel from './services/Excel';
-import solver from './services/solver'; // name!
+import solver from './services/solver2';
 import Dropzone from './components/Dropzone';
 import Inputs from './components/Inputs';
 import Outputs from './components/Outputs';
