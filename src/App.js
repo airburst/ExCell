@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Excel from './services/Excel';
 import solver from './services/solver';
+import makeCode from './services/makeCode';
 import Dropzone from './components/Dropzone';
 import Inputs from './components/Inputs';
 import Outputs from './components/Outputs';
@@ -30,7 +31,7 @@ class App extends Component {
   loadFile = file => {
     const excel = new Excel(file);
     this.setInfo(excel);
-    // console.log(excel);
+    console.log(makeCode(excel));
   };
 
   doCalculation = inputs => {
