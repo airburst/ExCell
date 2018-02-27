@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react';
-import { dp } from '../services/utils';
+import { dp } from '../../services/utils';
 
 const OutputItem = props => {
   const { name, value } = props;

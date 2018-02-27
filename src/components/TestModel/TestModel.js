@@ -4,7 +4,7 @@ import solver from '../../services/solver';
 import Inputs from './Inputs';
 import Outputs from './Outputs';
 
-class Home extends Component {
+class TestModel extends Component {
   constructor() {
     super();
     this.state = {
@@ -14,17 +14,24 @@ class Home extends Component {
     };
   }
 
-  setInfo = excel => {
-    this.setState({
-      calculate: solver(excel),
-      inputs: excel.inputs.map(i => ({
-        [i.name]: i.value,
-      })),
-      outputs: excel.outputs.map(o => ({
-        [o.name]: o.value,
-      })),
-    });
-  };
+  componentDidMount() {
+    this.setInfo();
+  }
+
+  setInfo() {
+    const { model } = this.props.settings;
+    if (model) {
+      this.setState({
+        calculate: solver(model),
+        inputs: model.inputs.map(i => ({
+          [i.name]: i.value,
+        })),
+        outputs: model.outputs.map(o => ({
+          [o.name]: o.value,
+        })),
+      });
+    }
+  }
 
   doCalculation = inputs => {
     // const start = new Date().getTime();
@@ -49,8 +56,8 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
+TestModel.propTypes = {
   settings: PropTypes.object.isRequired,
 };
 
-export default Home;
+export default TestModel;

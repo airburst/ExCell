@@ -1414,10 +1414,6 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-code-prettify@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/code-prettify/-/code-prettify-0.1.0.tgz#46870cc8c1a50d09bad539b33a983dbd4aa34b1e"
-
 code-prettify@alex-milanov/code-prettify:
   version "1.0.0"
   resolved "https://codeload.github.com/alex-milanov/code-prettify/tar.gz/ae9d5fbeb82870026456946b1934f2b876bb4525"

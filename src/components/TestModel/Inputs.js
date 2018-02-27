@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react';
-import { castNumber } from '../services/utils';
+import { castNumber } from '../../services/utils';
 
 const InputItem = props => {
   const { name, value, onChange } = props;
