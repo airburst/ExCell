@@ -7,10 +7,11 @@ import './Code.css';
 
 const CodeBlock = props => {
   const { code } = props.settings;
+  const codeString = code || '// No code loaded...';
 
   return (
     <div className="code-block">
-      <Code codeString={code || '// No code loaded...'} language="javascript" />
+      <Code codeString={codeString} language="javascript" />
       {code && (
         <div className="copy-button">
           <CopyToClipboard text={code}>

@@ -1,1 +1,1 @@
-export { SET_CODE, setCode } from './Settings';
+export { SET_CODE, setCode, SET_MODEL, setModel } from './Settings';
