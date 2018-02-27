@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Excel from './services/Excel';
-import solver from './services/solver2';
+import solver from './services/solver';
 import Dropzone from './components/Dropzone';
 import Inputs from './components/Inputs';
 import Outputs from './components/Outputs';
@@ -30,18 +30,17 @@ class App extends Component {
   loadFile = file => {
     const excel = new Excel(file);
     this.setInfo(excel);
-    console.log(excel);
-    console.log(Object.keys(excel.d).length);
+    // console.log(excel);
   };
 
   doCalculation = inputs => {
-    const start = new Date().getTime();
+    // const start = new Date().getTime();
     const results = this.state.calculate(inputs);
     const outputs = Object.entries(results).map(([name, value]) => ({
       [name]: value,
     }));
     this.setState({ outputs });
-    console.log(`Calculation took ${new Date().getTime() - start} ms`);
+    // console.log(`Calculation took ${new Date().getTime() - start} ms`);
   };
 
   handleFile = file => {

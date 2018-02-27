@@ -1,41 +1,43 @@
 import { run } from 'formula';
-import parser from './parser';
 import Excel from './Excel';
 
-const expandRange = (model, sheet, range, inputs) =>
-  model.explodeRange(sheet, range).map(row => {
-    if (!row.length) {
-      return row.input ? inputs[row.name] : row.value;
-    }
-    return row.map(cell => (cell.input ? inputs[cell.name] : cell.value));
-  });
-
-const processExcel = (model, inputs) => {
+const processExcel = (model, inputData) => {
+  const { d, formulae } = model;
   const results = {};
-  try {
-    model.formulae.forEach(f => {
-      const { sheet, ref, name, output } = f.cell;
-      const expressionInputs = {};
-      let expr = f.expression;
-      const ranges = parser.getRangeTokens(expr);
 
-      ranges.forEach((range, key) => {
-        const replaced = expandRange(model, sheet, range, inputs);
-        const rangeVar = `r${key}`;
-        expr = expr.replace(range, rangeVar);
-        expressionInputs[rangeVar] =
-          replaced.length > 1 ? replaced : replaced[0];
-      });
-      model.setCellValue(sheet, ref, run(expr, expressionInputs));
-      // console.log(
-      //   'COMPUTED',
-      //   `${sheet}!${ref}`,
-      //   `=${expr}`,
-      //   expressionInputs,
-      //   `=> ${model.getCellValue(sheet, ref)}`
-      // );
+  const getValue = ref => {
+    if (inputData[ref] !== undefined) {
+      return inputData[ref];
+    }
+    if (d[ref] !== undefined) {
+      return d[ref];
+    }
+    return ref;
+  };
+
+  const getValues = refs => {
+    if (!Array.isArray(refs)) {
+      return getValue(refs);
+    }
+    return refs.map(
+      ref => (!Array.isArray(ref) ? getValue(ref) : getValues(ref))
+    );
+  };
+
+  const processInputs = inputs => {
+    const values = {};
+    Object.entries(inputs).forEach(([key, value]) => {
+      values[key] = getValues(value);
+    });
+    return values;
+  };
+
+  try {
+    formulae.forEach(f => {
+      const { ref, expression, inputs, output } = f;
+      d[ref] = run(expression, processInputs(inputs));
       if (output) {
-        results[name] = model.getCellValue(sheet, ref);
+        results[output] = d[ref];
       }
     });
   } catch (e) {

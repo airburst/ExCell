@@ -31,8 +31,8 @@ export default class Excel {
         this.load(file);
         this.getIO();
         this.calculateDepths();
-        console.log(this.formulae);
         this.sortFormulaeByDepth();
+        this.data = null; // Clean up memory
       } catch (e) {
         throw new Error(`Error loading Excel file: ${e.message}`);
       }
@@ -72,7 +72,7 @@ export default class Excel {
   // prior formulae that must be run before this one. Also build up
   // collections of overall data and specific forulae input refs.
   getDepth(cell) {
-    const { sheet, ref, formula, value } = cell;
+    const { sheet, ref, formula, value, output, name } = cell;
     // Assign value to data store
     const field = makeRef(sheet, ref);
     this.d[field] = value;
@@ -88,7 +88,13 @@ export default class Excel {
     cells.map(c => this.getDepth(c));
     depth = 1 + Math.max.apply(null, cells.map(c => c.depth));
     cell.setDepth(depth);
-    this.formulae[field] = { field, expression, depth, inputs };
+    this.formulae[field] = {
+      field,
+      expression,
+      depth,
+      inputs,
+      output: output ? name : null,
+    };
     return depth;
   }
 
@@ -111,11 +117,18 @@ export default class Excel {
   expandRange(sheet, range) {
     return this.explodeRange(sheet, range).map(row => {
       if (!Array.isArray(row)) {
-        return row.input ? row.name : makeRef(row.sheet, row.ref);
+        if (row.input) {
+          return row.name;
+        }
+        // If the cell has a formula, return the ref, else value
+        return row.formula ? makeRef(row.sheet, row.ref) : row.value;
       }
-      return row.map(
-        cell => (cell.input ? cell.name : makeRef(cell.sheet, cell.ref))
-      );
+      return row.map(cell => {
+        if (cell.input) {
+          return cell.name;
+        }
+        return cell.formula ? makeRef(cell.sheet, cell.ref) : cell.value;
+      });
     });
   }
 
@@ -170,6 +183,7 @@ export default class Excel {
         expression: f.expression,
         d: f.depth,
         inputs: f.inputs,
+        output: f.output,
       }));
   }
 
