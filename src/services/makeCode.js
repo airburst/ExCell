@@ -1,8 +1,7 @@
 export default model => {
   const { d, formulae } = model;
 
-  const code = `
-import { run } from 'formula';
+  const code = `import { run } from 'formula';
 
 const calculate = inputData => {
   const d = ${JSON.stringify(d)};
@@ -43,8 +42,7 @@ const calculate = inputData => {
   return results;
 };
 
-export default calculate;
-  `;
+export default calculate;`;
 
   return code;
 };

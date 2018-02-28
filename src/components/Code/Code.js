@@ -2,29 +2,60 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Code from 'react-code-prettify';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import fileDownload from 'react-file-download';
 import { Button } from 'semantic-ui-react';
 import './Code.css';
 
-const CodeBlock = props => {
-  const { code } = props.settings;
-  const codeString = code || '// No code loaded...';
+class CodeBlock extends React.Component {
+  static propTypes = {
+    settings: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+  };
 
-  return (
-    <div className="code-block">
-      <Code codeString={codeString} language="javascript" />
-      {code && (
-        <div className="copy-button">
-          <CopyToClipboard text={code}>
-            <Button color="blue" content="Copy" />
-          </CopyToClipboard>
+  componentWillMount() {
+    const { settings, history } = this.props;
+    const { code } = settings;
+    if (!code) {
+      history.push('/');
+    }
+  }
+
+  download = () => {
+    fileDownload(this.props.settings.code, 'Calculate.js');
+  };
+
+  render() {
+    const { settings } = this.props;
+    const { code } = settings;
+    const codeString = code || '// No code loaded...';
+
+    return (
+      <div>
+        <div className="code-block">
+          <Code codeString={codeString} language="javascript" />
         </div>
-      )}
-    </div>
-  );
-};
-
-CodeBlock.propTypes = {
-  settings: PropTypes.object.isRequired,
-};
+        {code && (
+          <div className="code-actions">
+            <div>
+              <CopyToClipboard text={code}>
+                <Button
+                  color="green"
+                  size="large"
+                  content="Copy to Clipboard"
+                />
+              </CopyToClipboard>
+              <Button
+                color="green"
+                size="large"
+                content="Download File"
+                onClick={this.download}
+              />
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
 
 export default CodeBlock;

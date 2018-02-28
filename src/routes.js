@@ -1,8 +1,6 @@
 import React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import Home from './components/Home';
-import Code from './components/Code';
-import TestModel from './components/TestModel';
+import { Header, Home, Code, TestModel } from './components';
 import './index.css';
 
 // Add new routes here
@@ -16,7 +14,10 @@ const Routes = () => (
 
 const App = () => (
   <div className="App">
-    <Routes />
+    <Header />
+    <div className="content">
+      <Routes />
+    </div>
   </div>
 );
 

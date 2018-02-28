@@ -31,7 +31,7 @@ const UploadDropzone = props => {
       <Icon name="file excel outline" size="huge" />
       <p className="drop-text">Drop Excel file to upload</p>
       <Button
-        color="blue"
+        color="green"
         onClick={buttonHandler}
         content="Or Click to Select File"
       />

@@ -10,7 +10,8 @@ class Home extends Component {
     const excel = new Excel(file);
     setModel(excel);
     setCode(makeCode(excel));
-    history.push('/model');
+    history.push('/code');
+    // history.push('/model');
   };
 
   handleFile = file => {
@@ -25,11 +26,7 @@ class Home extends Component {
   };
 
   render() {
-    return (
-      <div className="App">
-        <Dropzone handleFile={this.handleFile} />
-      </div>
-    );
+    return <Dropzone handleFile={this.handleFile} />;
   }
 }
 

@@ -46,11 +46,9 @@ class TestModel extends Component {
   render() {
     const inputClass = this.state.inputs.length === 0 ? 'hidden info' : 'info';
     return (
-      <div className="App">
-        <div className={inputClass}>
-          <Inputs inputs={this.state.inputs} calculate={this.doCalculation} />
-          <Outputs outputs={this.state.outputs} />
-        </div>
+      <div className={inputClass}>
+        <Inputs inputs={this.state.inputs} calculate={this.doCalculation} />
+        <Outputs outputs={this.state.outputs} />
       </div>
     );
   }
