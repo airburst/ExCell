@@ -1,0 +1,13 @@
+.info {
+  display: flex;
+  flex-direction: row;
+}
+
+.inputs {
+  flex: 1;
+  margin-right: 40px;
+}
+
+.outputs {
+    flex: 1;
+}

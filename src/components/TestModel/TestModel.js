@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import solver from '../../services/solver';
 import Inputs from './Inputs';
 import Outputs from './Outputs';
+import './TestModel.css';
 
 class TestModel extends Component {
+  static propTypes = {
+    settings: PropTypes.object.isRequired,
+    setTiming: PropTypes.func.isRequired,
+  };
+
   constructor() {
     super();
     this.state = {
@@ -34,13 +40,15 @@ class TestModel extends Component {
   }
 
   doCalculation = inputs => {
-    // const start = new Date().getTime();
+    const { setTiming } = this.props;
+    const start = new Date().getTime();
     const results = this.state.calculate(inputs);
     const outputs = Object.entries(results).map(([name, value]) => ({
       [name]: value,
     }));
     this.setState({ outputs });
-    // console.log(`Calculation took ${new Date().getTime() - start} ms`);
+    const time = new Date().getTime() - start;
+    setTiming(time);
   };
 
   render() {
@@ -53,9 +61,5 @@ class TestModel extends Component {
     );
   }
 }
-
-TestModel.propTypes = {
-  settings: PropTypes.object.isRequired,
-};
 
 export default TestModel;

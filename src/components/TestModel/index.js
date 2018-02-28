@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 import TestModel from './TestModel';
-// import { setCode, setModel } from '../../actions';
+import { setTiming } from '../../actions';
 
 const mapStateToProps = ({ settings }) => ({ settings });
 
-// const mapDispatchToProps = dispatch => ({
-//   setCode: code => dispatch(setCode(code)),
-//   setModel: func => dispatch(setModel(func)),
-// });
+const mapDispatchToProps = dispatch => ({
+  setTiming: time => dispatch(setTiming(time)),
+});
 
-export default connect(mapStateToProps, {})(TestModel);
+export default connect(mapStateToProps, mapDispatchToProps)(TestModel);

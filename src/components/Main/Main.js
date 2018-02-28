@@ -22,6 +22,7 @@ export default class Main extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
+    const { timing } = this.props.settings;
     const { activeItem } = this.state;
 
     return (
@@ -37,6 +38,11 @@ export default class Main extends Component {
             active={activeItem === 'test'}
             onClick={this.handleItemClick}
           />
+          {this.state.activeItem === 'test' && (
+            <Menu.Menu position="right">
+              <Menu.Item>Time to calculate: {timing} ms</Menu.Item>
+            </Menu.Menu>
+          )}
         </Menu>
 
         {this.state.activeItem === 'code' && (
