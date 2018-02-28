@@ -4,14 +4,13 @@ import Excel from '../../services/Excel';
 import makeCode from '../../services/makeCode';
 import Dropzone from './Dropzone';
 
-class Home extends Component {
+class Load extends Component {
   loadFile = file => {
     const { history, setCode, setModel } = this.props;
     const excel = new Excel(file);
     setModel(excel);
     setCode(makeCode(excel));
-    history.push('/code');
-    // history.push('/model');
+    history.push('/');
   };
 
   handleFile = file => {
@@ -30,10 +29,10 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
+Load.propTypes = {
   setCode: PropTypes.func.isRequired,
   setModel: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 };
 
-export default Home;
+export default Load;

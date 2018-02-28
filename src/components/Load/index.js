@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Home from './Home';
+import Load from './Load';
 import { setCode, setModel } from '../../actions';
 
 const mapStateToProps = ({ settings }) => ({ settings });
@@ -9,5 +9,5 @@ const mapDispatchToProps = dispatch => ({
   setModel: func => dispatch(setModel(func)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Load);
 // export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Copy));

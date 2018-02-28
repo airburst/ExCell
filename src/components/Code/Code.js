@@ -9,16 +9,7 @@ import './Code.css';
 class CodeBlock extends React.Component {
   static propTypes = {
     settings: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
   };
-
-  componentWillMount() {
-    const { settings, history } = this.props;
-    const { code } = settings;
-    if (!code) {
-      history.push('/');
-    }
-  }
 
   download = () => {
     fileDownload(this.props.settings.code, 'Calculate.js');

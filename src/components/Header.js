@@ -1,11 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { Icon } from 'semantic-ui-react';
+import './Header.css';
 
 const Header = props => (
   <div className="header">
-    <Icon name="file excel outline" size="large" />
-    <div className="title">ExCell</div>
+    <Link to="/load" className="left">
+      <Icon name="file excel outline" size="large" />
+      <div className="title">ExCell</div>
+    </Link>
   </div>
 );
 
