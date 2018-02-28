@@ -1,5 +1,15 @@
 const isBlank = str => !str || /^\s*$/.test(str);
 
+const camelize = str =>
+  str
+    .toLowerCase()
+    .replace(
+      /(?:^\w|[A-Z]|\b\w)/g,
+      (letter, index) =>
+        index === 0 ? letter.toLowerCase() : letter.toUpperCase()
+    )
+    .replace(/\s+/g, '');
+
 const hasTwoParts = pair => pair.length > 1 && !isBlank(pair[1]);
 
 const pairs = text =>
@@ -11,7 +21,7 @@ const pairs = text =>
 const getCommentData = text => {
   const keyPairs = {};
   pairs(text).forEach(([type, value]) => {
-    keyPairs[type] = value.trim();
+    keyPairs[type] = camelize(value.trim());
   });
   keyPairs.name = keyPairs.I || keyPairs.O;
   return keyPairs;
