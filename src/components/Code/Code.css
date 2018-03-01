@@ -1,17 +1,24 @@
+.code-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* height: 100%; */
+}
+
 .code-block {
-  position: relative;
-  flex: 2;
-  overflow-y: auto;
-  overflow-x: hidden;
+  flex: 1;
   border-radius: 5px;
   background-color: #1d1f21;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.code-actions {
+  padding-top: 40px;
+  height: 82px;
 }
 
 .prettyprint {
   margin: 0;
   padding: 20px;
-}
-
-.code-actions {
-  margin-top: 40px;
 }

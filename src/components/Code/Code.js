@@ -21,7 +21,7 @@ class CodeBlock extends React.Component {
     const codeString = code || '// No code loaded...';
 
     return (
-      <div>
+      <div className="code-section">
         <div className="code-block">
           <Code codeString={codeString} language="javascript" />
         </div>

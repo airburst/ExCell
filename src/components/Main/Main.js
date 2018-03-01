@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Menu, Segment } from 'semantic-ui-react';
 import { Code, TestModel } from '../index';
+import '../../index.css';
 
-export default class Main extends Component {
+class Main extends Component {
   static propTypes = {
     settings: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
@@ -26,7 +27,7 @@ export default class Main extends Component {
     const { activeItem } = this.state;
 
     return (
-      <div>
+      <div className="main">
         <Menu attached="top" tabular>
           <Menu.Item
             name="code"
@@ -46,7 +47,7 @@ export default class Main extends Component {
         </Menu>
 
         {this.state.activeItem === 'code' && (
-          <Segment attached="bottom">
+          <Segment attached="bottom" className="code-segment">
             <Code />
           </Segment>
         )}
@@ -60,3 +61,5 @@ export default class Main extends Component {
     );
   }
 }
+
+export default Main;
