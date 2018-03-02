@@ -35,7 +35,7 @@ class Inputs extends React.Component {
           inputs[name] = value.toString();
         });
       });
-      this.setState(inputs);
+      this.setState(inputs, this.handleCalculate);
     }
   }
 

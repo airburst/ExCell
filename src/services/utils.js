@@ -15,10 +15,10 @@ export const arrayToString = array => {
   );
 };
 
-const zeroPad = (num, places) => {
-  const zero = places - num.toString().length + 1;
-  return Array(+(zero > 0 && zero)).join('0') + num;
-};
+// const zeroPad = (num, places) => {
+//   const zero = places - num.toString().length + 1;
+//   return Array(+(zero > 0 && zero)).join('0') + num;
+// };
 
 export const castNumber = num => {
   const cast = parseFloat(num, 10);
@@ -47,9 +47,7 @@ export const dp = (amount, places = 2) => {
     const exp = Math.pow(10, places);
     const truncated = Math.round(castNumber(amount) * exp) / exp;
     const result = parseFloat(truncated, 10);
-    return Number.isNaN(result)
-      ? amount.toFixed(places)
-      : result.toFixed(places);
+    return Number.isNaN(result) ? amount : result.toFixed(places);
   } catch (e) {
     console.log(`Rounding error: ${e.message}`);
     return amount;
@@ -71,7 +69,7 @@ const thousands = (num, places = 2) =>
     (c, i, a) => (i && c !== '.' && (a.length - i) % 3 === 0 ? `,${c}` : c)
   );
 
-export const parseNumber = (num, format) => {
+export const formatNumber = (num, format) => {
   if (!format || format === 'General') {
     return num.toString();
   }

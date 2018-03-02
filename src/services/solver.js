@@ -1,5 +1,6 @@
 import { run } from 'formula';
 import Excel from './Excel';
+import { formatNumber } from './utils';
 
 const processExcel = (model, inputData) => {
   const { d, formulae } = model;
@@ -34,10 +35,13 @@ const processExcel = (model, inputData) => {
 
   try {
     formulae.forEach(f => {
-      const { ref, expression, inputs, output } = f;
+      const { ref, expression, inputs, output, type, format } = f;
       d[ref] = run(expression, processInputs(inputs));
       if (output) {
-        results[output] = d[ref];
+        results[output] = {
+          val: d[ref],
+          formatted: type === 'n' ? formatNumber(d[ref], format) : d[ref],
+        };
       }
     });
   } catch (e) {
