@@ -3,17 +3,29 @@ import PropTypes from 'prop-types';
 import Excel from '../../services/Excel';
 import makeCode from '../../services/makeCode';
 import Dropzone from './Dropzone';
+import Loader from './Loader';
 
 class Load extends Component {
+  state = {
+    loading: false,
+  };
+
   loadFile = file => {
-    const { history, setCode, setModel } = this.props;
-    const excel = new Excel(file);
-    setModel(excel);
-    setCode(makeCode(excel));
-    history.push('/');
+    try {
+      const { history, setCode, setModel } = this.props;
+      const excel = new Excel(file);
+      setModel(excel);
+      setCode(makeCode(excel));
+      history.push('/');
+    } catch (e) {
+      this.setState({ loading: false });
+      // Show error
+      console.log(e.message);
+    }
   };
 
   handleFile = file => {
+    this.setState({ loading: true });
     const reader = new FileReader();
     reader.onload = () => {
       const data = reader.result;
@@ -25,7 +37,12 @@ class Load extends Component {
   };
 
   render() {
-    return <Dropzone handleFile={this.handleFile} />;
+    return (
+      <React.Fragment>
+        {!this.state.loading && <Dropzone handleFile={this.handleFile} />}
+        {this.state.loading && <Loader message="Processing spreadsheet.." />}
+      </React.Fragment>
+    );
   }
 }
 
