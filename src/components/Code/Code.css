@@ -14,11 +14,15 @@
 }
 
 .code-actions {
-  padding-top: 40px;
-  height: 82px;
+  padding-top: 14px;
+  height: 56px;
 }
 
 .prettyprint {
   margin: 0;
   padding: 20px;
+}
+
+.button-group > .ui.button {
+  margin-right: 14px;
 }

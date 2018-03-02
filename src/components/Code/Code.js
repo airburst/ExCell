@@ -27,7 +27,7 @@ class CodeBlock extends React.Component {
         </div>
         {code && (
           <div className="code-actions">
-            <div>
+            <div className="button-group">
               <CopyToClipboard text={code}>
                 <Button
                   color="green"
