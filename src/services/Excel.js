@@ -1,27 +1,19 @@
 import XLSX from 'xlsx';
 import parser from './parser';
-import { flatten } from './utils';
+import { flatten, makeRef, splitOutSheetName } from './utils';
 import Cell from './Cell';
 
-const makeRef = (sheet, ref) => `${sheet}!${ref}`;
-
-export const splitOutSheetName = (sheet, range, namedRanges) => {
-  const realRange = namedRanges.get(range) ? namedRanges.get(range) : range;
-  const r = realRange.split('!');
-  if (r.length === 2) {
-    return { sheet: r[0], range: r[1] };
-  }
-  return { sheet, range };
-};
-
 export default class Excel {
-  constructor(file) {
+  constructor(file, showFullRefs = false) {
     this.data = [];
     this.d = {};
     this.inputs = [];
     this.outputs = [];
     this.formulae = {};
     this.namedRanges = new Map();
+    this.refMap = new Map();
+    this.showFullRefs = showFullRefs;
+    this.counter = 0;
     this.loadFile(file);
   }
 
@@ -73,15 +65,13 @@ export default class Excel {
   // collections of overall data and specific forulae input refs.
   getDepth(cell) {
     const { sheet, ref, formula, value, output, name } = cell;
-    // Assign value to data store
-    const field = makeRef(sheet, ref);
-    this.d[field] = value;
-    // Only formulae have depth
+    const field = this.shortenRef(sheet, ref);
+    this.d[field] = this.d[field] || value; // Add to data store
     if (!formula) {
-      return 0;
+      return 0; // Only formulae have depth
     }
     if (this.formulae[field]) {
-      return this.formulae[field].depth;
+      return this.formulae[field].depth; // Memoize
     }
     let depth = 0;
     const { cells, expression, inputs } = this.precedents({ sheet, formula });
@@ -96,6 +86,23 @@ export default class Excel {
       output: output ? name : null,
     };
     return depth;
+  }
+
+  // Rewrite full sheet!ref as next alphabet letter
+  shortenRef(sheet, ref) {
+    const r = makeRef(sheet, ref);
+    // Write long data refs in showFullRefs mode
+    if (this.showFullRefs) {
+      return r;
+    }
+    const found = this.refMap.get(r);
+    if (found) {
+      return found;
+    }
+    const newRef = XLSX.utils.encode_col(this.counter);
+    this.refMap.set(r, newRef);
+    this.counter += 1;
+    return newRef;
   }
 
   precedents({ sheet, formula }) {
@@ -121,13 +128,15 @@ export default class Excel {
           return row.name;
         }
         // If the cell has a formula, return the ref, else value
-        return row.formula ? makeRef(row.sheet, row.ref) : row.value;
+        return row.formula ? this.shortenRef(row.sheet, row.ref) : row.value;
       }
       return row.map(cell => {
         if (cell.input) {
           return cell.name;
         }
-        return cell.formula ? makeRef(cell.sheet, cell.ref) : cell.value;
+        return cell.formula
+          ? this.shortenRef(cell.sheet, cell.ref)
+          : cell.value;
       });
     });
   }
@@ -189,25 +198,5 @@ export default class Excel {
 
   getCellByRef(sheet, ref) {
     return this.data.filter(d => d.sheet === sheet && d.ref === ref)[0];
-  }
-
-  getCellIndexByRef(sheet, ref) {
-    const cell = this.getCellByRef(sheet, ref);
-    if (!cell) {
-      return null;
-    }
-    return this.data.indexOf(cell);
-  }
-
-  getCellValue(sheet, ref) {
-    const cell = this.getCellByRef(sheet, ref);
-    return cell ? cell.value : null;
-  }
-
-  setCellValue(sheet, ref, value) {
-    const cell = this.getCellByRef(sheet, ref);
-    if (cell) {
-      cell.value = value;
-    }
   }
 }

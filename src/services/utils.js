@@ -38,5 +38,16 @@ export const dp = (amount, places = 2) => {
   }
 };
 
+export const makeRef = (sheet, ref) => `${sheet}!${ref}`;
+
+export const splitOutSheetName = (sheet, range, namedRanges) => {
+  const realRange = namedRanges.get(range) ? namedRanges.get(range) : range;
+  const r = realRange.split('!');
+  if (r.length === 2) {
+    return { sheet: r[0], range: r[1] };
+  }
+  return { sheet, range };
+};
+
 // Parse Excel date code
 // XLSX.SSF.parse_date_code
