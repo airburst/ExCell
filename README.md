@@ -1,14 +1,14 @@
 # ExCell
 
 ## A tool to convert Excel spreadsheets into real-time JavaScript calculations
-This app allows users to upload an Excel spreadsheet with `.xlsx` file extension and then generates a JavaScript module with a runnable version of its calculations.
+This app allows users to upload an Excel spreadsheet with a `.xlsx` file extension and then generates a JavaScript module with a runnable version of its calculations.
 
 A test harness is also created, allowing you to check that calculations are correct before downloading and implementing in your own projects.
 
 This app relies upon the excellent [formula](https://github.com/FormBucket/formula) library of Excel functions, written in native JavaScript.  You must either include this library as a dependency (the default in generated code), with `npm install --save formula`, or add an inline script tag in your HTML to import a distribution version of `formula.min.js`.
 
 ## Preparing Excel Spreadsheets
-The app needs a way to identify which cells are the inputs and outputs of the overall calculation. To do this, simply add cell comments using the style:
+The app needs a way to identify which cells are inputs and outputs of the overall calculation. To do this, simply add cell comments using the style:
 
 ```
 I: My input tag name
@@ -76,7 +76,7 @@ Inputs and outputs are JavaScript objects, comprising all of the named tags as k
 
 In a library like React, use form state for inputs and outputs **with names that match the tag variables from your spreadsheet**.
 
-Add an event handler for `onChange` or `onClick` to pass the inputs object into the
+Add an event handler for `onChange` or `onClick` to pass the inputs object into the calculate function.
 ```
 import calculate from './Calculate';
 
@@ -85,10 +85,7 @@ import calculate from './Calculate';
 doCalculation = inputs => {
   const results = calculate(inputs);
   // Optionally convert the output object into an array
-  const outputs = Object.entries(results)
-    .map(([name, value]) => ({
-      [name]: value,
-    }));
+  const outputs = Object.entries(results).map(([name, value]) => ({ [name]: value }));
   this.setState({ outputs });
 };
 ```
