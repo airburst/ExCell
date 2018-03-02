@@ -82,8 +82,8 @@ import calculate from './Calculate';
 
 ...
 
-doCalculation = inputs => {
-  const results = calculate(inputs);
+doCalculation = () => {
+  const results = calculate(this.state.inputs);
   // Optionally convert the output object into an array
   const outputs = Object.entries(results).map(([name, value]) => ({ [name]: value }));
   this.setState({ outputs });
