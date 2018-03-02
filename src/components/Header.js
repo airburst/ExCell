@@ -9,6 +9,15 @@ const Header = () => (
       <Icon name="file excel outline" size="large" />
       <div className="title">ExCell</div>
     </Link>
+    <a
+      className="right"
+      href="https://github.com/airburst/ExCell/blob/master/README.md"
+      title="Further information on Github. (Opens in a new window)"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Icon name="help" />
+    </a>
   </div>
 );
 
