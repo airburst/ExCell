@@ -6,6 +6,7 @@ export default class Cell {
     this.value = 0;
     this.initialiseValueByType(this.type, cellData.v);
     this.formula = cellData.f ? cellData.f : null;
+    this.format = cellData.z;
     this.sheet = sheet;
     this.ref = ref;
     this.input = null;

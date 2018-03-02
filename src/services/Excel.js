@@ -32,7 +32,7 @@ export default class Excel {
   }
 
   load(file) {
-    const workbook = XLSX.read(file, { type: 'binary' });
+    const workbook = XLSX.read(file, { type: 'binary', cellNF: true });
     this.setNamedRanges(workbook);
     const sheetNames = workbook.SheetNames;
     sheetNames.forEach(name => {
@@ -64,7 +64,7 @@ export default class Excel {
   // prior formulae that must be run before this one. Also build up
   // collections of overall data and specific forulae input refs.
   getDepth(cell) {
-    const { sheet, ref, formula, value, output, name } = cell;
+    const { sheet, ref, formula, value, output, name, type, format } = cell;
     const field = this.shortenRef(sheet, ref);
     this.d[field] = this.d[field] || value; // Add to data store
     if (!formula) {
@@ -83,8 +83,12 @@ export default class Excel {
       expression,
       depth,
       inputs,
-      output: output ? name : null,
     };
+    if (output) {
+      this.formulae[field].output = name;
+      this.formulae[field].type = type;
+      this.formulae[field].format = format;
+    }
     return depth;
   }
 
@@ -187,13 +191,20 @@ export default class Excel {
     this.formulae = Object.entries(this.formulae)
       .map(([err, value]) => value)
       .sort((a, b) => a.depth - b.depth || a.formula - b.formula)
-      .map(f => ({
-        ref: f.field,
-        expression: f.expression,
-        d: f.depth,
-        inputs: f.inputs,
-        output: f.output,
-      }));
+      .map(f => {
+        const fn = {
+          ref: f.field,
+          expression: f.expression,
+          d: f.depth,
+          inputs: f.inputs,
+        };
+        if (f.output) {
+          fn.output = f.output;
+          fn.type = f.type;
+          fn.format = f.format;
+        }
+        return fn;
+      });
   }
 
   getCellByRef(sheet, ref) {
