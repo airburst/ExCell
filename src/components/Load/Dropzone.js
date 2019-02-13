@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import { Button, Icon } from 'semantic-ui-react';
@@ -28,13 +28,26 @@ const UploadDropzone = props => {
       accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       onDrop={onDrop}
     >
-      <Icon name="file excel outline" size="huge" />
-      <p className="drop-text">Drop Excel file to upload</p>
-      <Button
-        color="green"
-        onClick={buttonHandler}
-        content="Or Click to Select File"
-      />
+      {({ getRootProps, getInputProps, isDragActive }) => {
+        const dropClass = `dropzone${isDragActive ? ' active' : ''}`;
+        return (
+          <div {...getRootProps()} className={dropClass}>
+            <input {...getInputProps()} />
+            {
+              <Fragment>
+                <Icon name="file excel outline" size="huge" />
+                <p className="drop-text">Drop Excel file to upload</p>
+                <Button
+                  onClick={buttonHandler}
+                  content="Or Click to Select File"
+                  color="green"
+                />
+                {/* {uploading && <Loader message="Uploading file..." />} */}
+              </Fragment>
+            }
+          </div>
+        );
+      }}
     </Dropzone>
   );
 };
